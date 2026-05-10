@@ -3,376 +3,787 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Souvnir — Legal</title>
+  <title>Souv'nir — Legal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAF9F6;
-      --text: #1A1A1A;
-      --muted: #6B6B6B;
+      --bg: #FDFCFA;
+      --text: #1C1917;
+      --muted: #78716C;
       --accent: #C87941;
-      --accent-light: rgba(200, 121, 65, 0.08);
+      --accent-hover: #B56A35;
+      --accent-light: rgba(200, 121, 65, 0.06);
+      --accent-glow: rgba(200, 121, 65, 0.15);
       --card: #FFFFFF;
-      --border: #E8E4DF;
-      --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+      --border: #F0ECE6;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.03);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.03);
+      --radius: 16px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* Background grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ambient gradient blobs */
+    .ambient {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .ambient .blob:nth-child(1) {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(200,121,65,0.12), transparent 70%);
+      top: -100px; right: -100px;
+      animation-delay: 0s;
+    }
+
+    .ambient .blob:nth-child(2) {
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(200,121,65,0.08), transparent 70%);
+      bottom: -50px; left: -80px;
+      animation-delay: -7s;
+    }
+
+    .ambient .blob:nth-child(3) {
+      width: 250px; height: 250px;
+      background: radial-gradient(circle, rgba(180,140,100,0.06), transparent 70%);
+      top: 40%; left: 50%;
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.05); }
+      66% { transform: translate(-20px, 15px) scale(0.95); }
     }
 
     .container {
-      max-width: 680px;
+      max-width: 700px;
       margin: 0 auto;
-      padding: 60px 24px 100px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
     }
 
-    .logo {
+    /* Header */
+    .header {
       text-align: center;
-      margin-bottom: 48px;
+      padding: 72px 0 48px;
     }
 
-    .logo h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 38px;
-      font-weight: 700;
+    .header .icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .header .icon svg {
+      width: 32px;
+      height: 32px;
+      fill: none;
+      stroke: white;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .header h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 42px;
+      font-weight: 400;
       letter-spacing: -0.5px;
+      margin-bottom: 8px;
     }
 
-    .logo h1 span {
+    .header h1 span {
       color: var(--accent);
     }
 
-    .logo p {
-      font-size: 14px;
+    .header .subtitle {
+      font-size: 15px;
       color: var(--muted);
-      margin-top: 6px;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 500;
     }
 
-    .lang-switch {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .lang-switch button {
-      background: none;
-      border: 1px solid var(--border);
-      padding: 8px 22px;
-      margin: 0 4px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted);
-      transition: all 0.25s ease;
-    }
-
-    .lang-switch button:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .lang-switch button.active {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      margin-bottom: 44px;
-    }
-
-    .tabs button {
-      background: none;
-      border: 1px solid var(--border);
-      padding: 10px 28px;
-      border-radius: 24px;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--muted);
-      transition: all 0.25s ease;
-    }
-
-    .tabs button:hover {
-      border-color: var(--text);
-      color: var(--text);
-    }
-
-    .tabs button.active {
-      background: var(--text);
-      color: white;
-      border-color: var(--text);
-    }
-
-    .page { display: none; }
-    .page.active { display: block; animation: fadeIn 0.3s ease; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .section {
+    /* Navigation bar */
+    .nav-bar {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 28px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow);
-      transition: box-shadow 0.2s ease;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-bar .separator {
+      width: 1px;
+      height: 28px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .nav-group {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav-bar button {
+      background: none;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-bar button:hover {
+      color: var(--text);
+      background: var(--accent-light);
+    }
+
+    .nav-bar .lang-btn.active {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    .nav-bar .tab-btn.active {
+      background: var(--text);
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Page content */
+    .page { display: none; }
+    .page.active { display: block; animation: pageIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Section cards */
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
     }
 
     .section:hover {
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.05);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
     }
 
-    .section h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: var(--text);
+    .section-header {
+      padding: 20px 24px;
       display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .section-header:hover {
+      background: var(--accent-light);
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .section-header h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .section-header .chevron {
+      width: 20px;
+      height: 20px;
+      color: var(--muted);
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .section.open .section-header .chevron {
+      transform: rotate(180deg);
+    }
+
+    .section-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .section.open .section-body {
+      max-height: 600px;
+    }
+
+    .section-body-inner {
+      padding: 0 24px 22px 72px;
+      font-size: 14.5px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .section-body-inner ul {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+    }
+
+    .section-body-inner ul li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 6px;
+    }
+
+    .section-body-inner ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    .section-body-inner a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .section-body-inner a:hover {
+      text-decoration: underline;
+    }
+
+    /* Updated date */
+    .updated {
+      text-align: center;
+      margin-top: 32px;
+      padding: 12px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--accent-light);
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .updated svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Contact card */
+    .contact-card {
+      margin-top: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      text-align: center;
+      box-shadow: 0 8px 32px var(--accent-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.1));
+      pointer-events: none;
+    }
+
+    .contact-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .contact-card a {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+
+    .contact-card a:hover {
+      opacity: 0.85;
+    }
+
+    .contact-card a svg {
+      width: 20px;
+      height: 20px;
+      stroke: white;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px 0 48px;
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
       align-items: center;
       gap: 8px;
     }
 
-    .section h3::before {
-      content: '';
-      display: inline-block;
-      width: 3px;
-      height: 16px;
-      background: var(--accent);
-      border-radius: 2px;
+    .footer .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 4px;
     }
 
-    .section p {
-      font-size: 14.5px;
-      color: var(--muted);
-      white-space: pre-line;
-      line-height: 1.8;
-    }
-
-    .updated {
-      text-align: center;
-      margin-top: 36px;
-      font-size: 13px;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    .contact {
-      text-align: center;
-      margin-top: 24px;
-      padding: 20px;
-      background: var(--accent-light);
-      border-radius: 12px;
-    }
-
-    .contact p {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .contact a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-      transition: opacity 0.2s;
-    }
-
-    .contact a:hover {
-      opacity: 0.8;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 48px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      font-size: 12px;
-      color: var(--muted);
-    }
-
+    /* Dark mode */
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #141413;
-        --text: #F0EDE8;
-        --muted: #A0A0A0;
-        --card: #1E1E1D;
-        --border: #2E2E2C;
+        --bg: #0F0E0D;
+        --text: #F5F0EB;
+        --muted: #9C9590;
+        --card: #1A1918;
+        --border: #2A2826;
         --accent-light: rgba(200, 121, 65, 0.1);
-        --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+        --accent-glow: rgba(200, 121, 65, 0.2);
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.15);
+        --shadow-md: 0 4px 16px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.1);
+        --shadow-lg: 0 8px 32px rgba(0,0,0,0.3);
       }
+
+      .ambient .blob { opacity: 0.2; }
     }
 
-    @media (max-width: 480px) {
-      .container { padding: 40px 16px 80px; }
-      .logo h1 { font-size: 32px; }
-      .section { padding: 22px 20px; }
-      .tabs button { padding: 10px 20px; font-size: 13px; }
+    /* Mobile */
+    @media (max-width: 600px) {
+      .header { padding: 48px 0 36px; }
+      .header h1 { font-size: 34px; }
+      .header .icon { width: 52px; height: 52px; border-radius: 14px; }
+      .header .icon svg { width: 26px; height: 26px; }
+      .container { padding: 0 16px; }
+      .nav-bar { flex-wrap: wrap; }
+      .nav-bar .separator { display: none; }
+      .nav-group { justify-content: center; }
+      .section-body-inner { padding-left: 24px; }
+      .contact-card { padding: 28px 24px; }
+      .contact-card a { font-size: 16px; }
     }
   </style>
 </head>
 <body>
+  <div class="ambient">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+  </div>
+
   <div class="container">
-    <div class="logo">
+    <div class="header">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+      </div>
       <h1>Souv<span>'</span>nir</h1>
-      <p>Documents juridiques</p>
+      <p class="subtitle">Documents juridiques</p>
     </div>
 
-    <div class="lang-switch">
-      <button class="active" onclick="setLang('fr')">Fran&ccedil;ais</button>
-      <button onclick="setLang('en')">English</button>
-    </div>
-
-    <div class="tabs">
-      <button class="active" onclick="setTab('privacy')">
-        <span class="tab-fr">Confidentialit&eacute;</span>
-        <span class="tab-en" style="display:none">Privacy</span>
-      </button>
-      <button onclick="setTab('terms')">
-        <span class="tab-fr">Conditions</span>
-        <span class="tab-en" style="display:none">Terms</span>
-      </button>
+    <div class="nav-bar">
+      <div class="nav-group">
+        <button class="lang-btn active" onclick="setLang('fr')">Fran&ccedil;ais</button>
+        <button class="lang-btn" onclick="setLang('en')">English</button>
+      </div>
+      <div class="separator"></div>
+      <div class="nav-group">
+        <button class="tab-btn active" onclick="setTab('privacy')">
+          <span class="tab-fr">Confidentialit&eacute;</span>
+          <span class="tab-en" style="display:none">Privacy</span>
+        </button>
+        <button class="tab-btn" onclick="setTab('terms')">
+          <span class="tab-fr">Conditions</span>
+          <span class="tab-en" style="display:none">Terms</span>
+        </button>
+      </div>
     </div>
 
     <!-- FR Privacy -->
     <div class="page active" id="fr-privacy">
-      <div class="section"><h3>Introduction</h3><p>Souvnir (&laquo; nous &raquo;, &laquo; notre &raquo;, &laquo; l'application &raquo;) s'engage &agrave; prot&eacute;ger la vie priv&eacute;e de ses utilisateurs. Cette politique d&eacute;crit comment nous collectons, utilisons et prot&eacute;geons vos informations personnelles.</p></div>
-      <div class="section"><h3>Donn&eacute;es collect&eacute;es</h3><p>&bull; Informations de compte : adresse e-mail, nom d'affichage
-&bull; Notes vocales : enregistrements audio que vous cr&eacute;ez
-&bull; Donn&eacute;es de localisation : coordonn&eacute;es GPS associ&eacute;es &agrave; vos notes vocales
-&bull; Donn&eacute;es d'utilisation : interactions avec l'application pour am&eacute;liorer nos services</p></div>
-      <div class="section"><h3>Utilisation des donn&eacute;es</h3><p>Vos donn&eacute;es sont utilis&eacute;es exclusivement pour :
-&bull; Fournir et am&eacute;liorer les fonctionnalit&eacute;s de l'application
-&bull; Associer vos notes vocales aux lieux choisis
-&bull; Permettre le partage de souvenirs avec vos amis
-&bull; Vous envoyer des notifications pertinentes (si activ&eacute;es)</p></div>
-      <div class="section"><h3>Stockage et s&eacute;curit&eacute;</h3><p>Vos donn&eacute;es sont stock&eacute;es de mani&egrave;re s&eacute;curis&eacute;e via Supabase, avec chiffrement en transit et au repos. Les notes vocales sont stock&eacute;es dans un espace de stockage s&eacute;curis&eacute; et ne sont accessibles qu'&agrave; vous et aux destinataires que vous avez choisis.</p></div>
-      <div class="section"><h3>Partage des donn&eacute;es</h3><p>Nous ne vendons jamais vos donn&eacute;es personnelles. Vos notes vocales ne sont partag&eacute;es qu'avec les destinataires que vous d&eacute;signez explicitement. Nous ne partageons pas vos donn&eacute;es avec des tiers &agrave; des fins publicitaires.</p></div>
-      <div class="section"><h3>Vos droits</h3><p>&bull; Acc&eacute;der &agrave; vos donn&eacute;es personnelles
-&bull; Supprimer votre compte et toutes les donn&eacute;es associ&eacute;es
-&bull; Modifier vos informations de profil
-&bull; Retirer votre consentement &agrave; tout moment
-
-Pour exercer ces droits, contactez-nous &agrave; support@djabelsolutions.fr</p></div>
-      <div class="section"><h3>Localisation</h3><p>L'application utilise votre position g&eacute;ographique uniquement pour :
-&bull; Associer un lieu &agrave; vos notes vocales
-&bull; Vous notifier quand vous &ecirc;tes proche d'un souvenir
-
-Vous pouvez d&eacute;sactiver l'acc&egrave;s &agrave; la localisation &agrave; tout moment dans les r&eacute;glages de votre appareil.</p></div>
-      <div class="section"><h3>Modifications</h3><p>Nous pouvons mettre &agrave; jour cette politique de confidentialit&eacute;. Les modifications importantes seront notifi&eacute;es via l'application.</p></div>
-      <div class="updated">Derni&egrave;re mise &agrave; jour : mai 2025</div>
+      <div class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+          <h3>Introduction</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Souv'nir (&laquo; nous &raquo;, &laquo; notre &raquo;, &laquo; l'application &raquo;) s'engage &agrave; prot&eacute;ger la vie priv&eacute;e de ses utilisateurs. Cette politique d&eacute;crit comment nous collectons, utilisons et prot&eacute;geons vos informations personnelles.</div></div>
+      </div>
+      <div class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <h3>Donn&eacute;es collect&eacute;es</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner"><ul><li>Informations de compte : adresse e-mail, nom d'affichage</li><li>Notes vocales : enregistrements audio que vous cr&eacute;ez</li><li>Donn&eacute;es de localisation : coordonn&eacute;es GPS associ&eacute;es &agrave; vos notes vocales</li><li>Donn&eacute;es d'utilisation : interactions avec l'application pour am&eacute;liorer nos services</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Utilisation des donn&eacute;es</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Vos donn&eacute;es sont utilis&eacute;es exclusivement pour :<ul><li>Fournir et am&eacute;liorer les fonctionnalit&eacute;s de l'application</li><li>Associer vos notes vocales aux lieux choisis</li><li>Permettre le partage de souvenirs avec vos amis</li><li>Vous envoyer des notifications pertinentes (si activ&eacute;es)</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h3>Stockage et s&eacute;curit&eacute;</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Vos donn&eacute;es sont stock&eacute;es de mani&egrave;re s&eacute;curis&eacute;e via Supabase, avec chiffrement en transit et au repos. Les notes vocales sont stock&eacute;es dans un espace de stockage s&eacute;curis&eacute; et ne sont accessibles qu'&agrave; vous et aux destinataires que vous avez choisis.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Partage des donn&eacute;es</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Nous ne vendons jamais vos donn&eacute;es personnelles. Vos notes vocales ne sont partag&eacute;es qu'avec les destinataires que vous d&eacute;signez explicitement. Nous ne partageons pas vos donn&eacute;es avec des tiers &agrave; des fins publicitaires.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
+          <h3>Vos droits</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner"><ul><li>Acc&eacute;der &agrave; vos donn&eacute;es personnelles</li><li>Supprimer votre compte et toutes les donn&eacute;es associ&eacute;es</li><li>Modifier vos informations de profil</li><li>Retirer votre consentement &agrave; tout moment</li></ul><br>Pour exercer ces droits, contactez-nous &agrave; <a href="mailto:support@djabelsolutions.fr">support@djabelsolutions.fr</a></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <h3>Localisation</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">L'application utilise votre position g&eacute;ographique uniquement pour :<ul><li>Associer un lieu &agrave; vos notes vocales</li><li>Vous notifier quand vous &ecirc;tes proche d'un souvenir</li></ul><br>Vous pouvez d&eacute;sactiver l'acc&egrave;s &agrave; la localisation &agrave; tout moment dans les r&eacute;glages de votre appareil.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+          <h3>Modifications</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Nous pouvons mettre &agrave; jour cette politique de confidentialit&eacute;. Les modifications importantes seront notifi&eacute;es via l'application.</div></div>
+      </div>
+      <div class="updated"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Derni&egrave;re mise &agrave; jour : mai 2025</div>
     </div>
 
     <!-- FR Terms -->
     <div class="page" id="fr-terms">
-      <div class="section"><h3>Acceptation</h3><p>En utilisant Souvnir, vous acceptez les pr&eacute;sentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'application.</p></div>
-      <div class="section"><h3>Description du service</h3><p>Souvnir est une application permettant de cr&eacute;er des notes vocales g&eacute;olocalis&eacute;es et de les partager avec vos amis. L'application est fournie &laquo; en l'&eacute;tat &raquo; et peut &ecirc;tre modifi&eacute;e ou interrompue &agrave; tout moment.</p></div>
-      <div class="section"><h3>Compte utilisateur</h3><p>&bull; Vous devez fournir des informations exactes lors de l'inscription
-&bull; Vous &ecirc;tes responsable de la s&eacute;curit&eacute; de votre compte
-&bull; Un seul compte par personne est autoris&eacute;
-&bull; Vous devez avoir au moins 13 ans pour utiliser l'application</p></div>
-      <div class="section"><h3>Contenu utilisateur</h3><p>Vous conservez la propri&eacute;t&eacute; de vos notes vocales. En utilisant Souvnir, vous nous accordez une licence limit&eacute;e pour stocker et transmettre votre contenu aux destinataires d&eacute;sign&eacute;s.
-
-Vous vous engagez &agrave; ne pas publier de contenu :
-&bull; Ill&eacute;gal, mena&ccedil;ant ou harcelant
-&bull; Portant atteinte aux droits d'autrui
-&bull; Contenant des virus ou du code malveillant</p></div>
-      <div class="section"><h3>Limites d'utilisation</h3><p>&bull; Limite gratuite : 10 notes vocales actives
-&bull; Dur&eacute;e maximale par note : 30 secondes
-&bull; Ces limites pourront &eacute;voluer avec les futures offres de l'application</p></div>
-      <div class="section"><h3>Responsabilit&eacute;</h3><p>Souvnir ne saurait &ecirc;tre tenu responsable :
-&bull; De la perte de donn&eacute;es due &agrave; des circonstances ind&eacute;pendantes de notre volont&eacute;
-&bull; De l'utilisation que vous faites de l'application
-&bull; Du contenu cr&eacute;&eacute; par les utilisateurs</p></div>
-      <div class="section"><h3>R&eacute;siliation</h3><p>Nous nous r&eacute;servons le droit de suspendre ou supprimer votre compte en cas de violation de ces conditions. Vous pouvez supprimer votre compte &agrave; tout moment.</p></div>
-      <div class="section"><h3>Droit applicable</h3><p>Ces conditions sont r&eacute;gies par le droit fran&ccedil;ais. Tout litige sera soumis aux tribunaux comp&eacute;tents de Paris, France.</p></div>
-      <div class="updated">Derni&egrave;re mise &agrave; jour : mai 2025</div>
+      <div class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h3>Acceptation</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">En utilisant Souv'nir, vous acceptez les pr&eacute;sentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'application.</div></div>
+      </div>
+      <div class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+          <h3>Description du service</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Souv'nir est une application permettant de cr&eacute;er des notes vocales g&eacute;olocalis&eacute;es et de les partager avec vos amis. L'application est fournie &laquo; en l'&eacute;tat &raquo; et peut &ecirc;tre modifi&eacute;e ou interrompue &agrave; tout moment.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h3>Compte utilisateur</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner"><ul><li>Vous devez fournir des informations exactes lors de l'inscription</li><li>Vous &ecirc;tes responsable de la s&eacute;curit&eacute; de votre compte</li><li>Un seul compte par personne est autoris&eacute;</li><li>Vous devez avoir au moins 13 ans pour utiliser l'application</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
+          <h3>Contenu utilisateur</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Vous conservez la propri&eacute;t&eacute; de vos notes vocales. En utilisant Souv'nir, vous nous accordez une licence limit&eacute;e pour stocker et transmettre votre contenu aux destinataires d&eacute;sign&eacute;s.<br><br>Vous vous engagez &agrave; ne pas publier de contenu :<ul><li>Ill&eacute;gal, mena&ccedil;ant ou harcelant</li><li>Portant atteinte aux droits d'autrui</li><li>Contenant des virus ou du code malveillant</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2" ry="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <h3>Limites d'utilisation</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner"><ul><li>Limite gratuite : 10 notes vocales actives</li><li>Dur&eacute;e maximale par note : 30 secondes</li><li>Ces limites pourront &eacute;voluer avec les futures offres de l'application</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Responsabilit&eacute;</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Souv'nir ne saurait &ecirc;tre tenu responsable :<ul><li>De la perte de donn&eacute;es due &agrave; des circonstances ind&eacute;pendantes de notre volont&eacute;</li><li>De l'utilisation que vous faites de l'application</li><li>Du contenu cr&eacute;&eacute; par les utilisateurs</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+          <h3>R&eacute;siliation</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Nous nous r&eacute;servons le droit de suspendre ou supprimer votre compte en cas de violation de ces conditions. Vous pouvez supprimer votre compte &agrave; tout moment.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <h3>Droit applicable</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Ces conditions sont r&eacute;gies par le droit fran&ccedil;ais. Tout litige sera soumis aux tribunaux comp&eacute;tents de Paris, France.</div></div>
+      </div>
+      <div class="updated"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Derni&egrave;re mise &agrave; jour : mai 2025</div>
     </div>
 
     <!-- EN Privacy -->
     <div class="page" id="en-privacy">
-      <div class="section"><h3>Introduction</h3><p>Souvnir ("we", "our", "the app") is committed to protecting the privacy of its users. This policy describes how we collect, use, and protect your personal information.</p></div>
-      <div class="section"><h3>Data collected</h3><p>&bull; Account information: email address, display name
-&bull; Voice notes: audio recordings you create
-&bull; Location data: GPS coordinates associated with your voice notes
-&bull; Usage data: interactions with the app to improve our services</p></div>
-      <div class="section"><h3>Use of data</h3><p>Your data is used exclusively to:
-&bull; Provide and improve app features
-&bull; Associate your voice notes with chosen locations
-&bull; Enable sharing souvenirs with your friends
-&bull; Send you relevant notifications (if enabled)</p></div>
-      <div class="section"><h3>Storage and security</h3><p>Your data is securely stored via Supabase, with encryption in transit and at rest. Voice notes are stored in secure storage and are only accessible to you and the recipients you have chosen.</p></div>
-      <div class="section"><h3>Data sharing</h3><p>We never sell your personal data. Your voice notes are only shared with recipients you explicitly designate. We do not share your data with third parties for advertising purposes.</p></div>
-      <div class="section"><h3>Your rights</h3><p>&bull; Access your personal data
-&bull; Delete your account and all associated data
-&bull; Modify your profile information
-&bull; Withdraw your consent at any time
-
-To exercise these rights, contact us at support@djabelsolutions.fr</p></div>
-      <div class="section"><h3>Location</h3><p>The app uses your geographic location only to:
-&bull; Associate a place with your voice notes
-&bull; Notify you when you are near a souvenir
-
-You can disable location access at any time in your device settings.</p></div>
-      <div class="section"><h3>Changes</h3><p>We may update this privacy policy. Significant changes will be notified through the app.</p></div>
-      <div class="updated">Last updated: May 2025</div>
+      <div class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+          <h3>Introduction</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Souv'nir ("we", "our", "the app") is committed to protecting the privacy of its users. This policy describes how we collect, use, and protect your personal information.</div></div>
+      </div>
+      <div class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <h3>Data collected</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner"><ul><li>Account information: email address, display name</li><li>Voice notes: audio recordings you create</li><li>Location data: GPS coordinates associated with your voice notes</li><li>Usage data: interactions with the app to improve our services</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Use of data</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Your data is used exclusively to:<ul><li>Provide and improve app features</li><li>Associate your voice notes with chosen locations</li><li>Enable sharing souvenirs with your friends</li><li>Send you relevant notifications (if enabled)</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h3>Storage and security</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Your data is securely stored via Supabase, with encryption in transit and at rest. Voice notes are stored in secure storage and are only accessible to you and the recipients you have chosen.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Data sharing</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">We never sell your personal data. Your voice notes are only shared with recipients you explicitly designate. We do not share your data with third parties for advertising purposes.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
+          <h3>Your rights</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner"><ul><li>Access your personal data</li><li>Delete your account and all associated data</li><li>Modify your profile information</li><li>Withdraw your consent at any time</li></ul><br>To exercise these rights, contact us at <a href="mailto:support@djabelsolutions.fr">support@djabelsolutions.fr</a></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <h3>Location</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">The app uses your geographic location only to:<ul><li>Associate a place with your voice notes</li><li>Notify you when you are near a souvenir</li></ul><br>You can disable location access at any time in your device settings.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+          <h3>Changes</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">We may update this privacy policy. Significant changes will be notified through the app.</div></div>
+      </div>
+      <div class="updated"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Last updated: May 2025</div>
     </div>
 
     <!-- EN Terms -->
     <div class="page" id="en-terms">
-      <div class="section"><h3>Acceptance</h3><p>By using Souvnir, you agree to these terms of service. If you do not agree to these terms, please do not use the app.</p></div>
-      <div class="section"><h3>Service description</h3><p>Souvnir is an application for creating geolocated voice notes and sharing them with friends. The app is provided "as is" and may be modified or discontinued at any time.</p></div>
-      <div class="section"><h3>User account</h3><p>&bull; You must provide accurate information when registering
-&bull; You are responsible for the security of your account
-&bull; Only one account per person is allowed
-&bull; You must be at least 13 years old to use the app</p></div>
-      <div class="section"><h3>User content</h3><p>You retain ownership of your voice notes. By using Souvnir, you grant us a limited license to store and transmit your content to designated recipients.
-
-You agree not to post content that is:
-&bull; Illegal, threatening, or harassing
-&bull; Infringing on the rights of others
-&bull; Containing viruses or malicious code</p></div>
-      <div class="section"><h3>Usage limits</h3><p>&bull; Free limit: 10 active voice notes
-&bull; Maximum duration per note: 30 seconds
-&bull; These limits may evolve with future app offerings</p></div>
-      <div class="section"><h3>Liability</h3><p>Souvnir shall not be held liable for:
-&bull; Data loss due to circumstances beyond our control
-&bull; Your use of the application
-&bull; Content created by users</p></div>
-      <div class="section"><h3>Termination</h3><p>We reserve the right to suspend or delete your account in case of violation of these terms. You can delete your account at any time.</p></div>
-      <div class="section"><h3>Governing law</h3><p>These terms are governed by French law. Any dispute shall be submitted to the competent courts of Paris, France.</p></div>
-      <div class="updated">Last updated: May 2025</div>
+      <div class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h3>Acceptance</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">By using Souv'nir, you agree to these terms of service. If you do not agree to these terms, please do not use the app.</div></div>
+      </div>
+      <div class="section open">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+          <h3>Service description</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Souv'nir is an application for creating geolocated voice notes and sharing them with friends. The app is provided "as is" and may be modified or discontinued at any time.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h3>User account</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner"><ul><li>You must provide accurate information when registering</li><li>You are responsible for the security of your account</li><li>Only one account per person is allowed</li><li>You must be at least 13 years old to use the app</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
+          <h3>User content</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">You retain ownership of your voice notes. By using Souv'nir, you grant us a limited license to store and transmit your content to designated recipients.<br><br>You agree not to post content that is:<ul><li>Illegal, threatening, or harassing</li><li>Infringing on the rights of others</li><li>Containing viruses or malicious code</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2" ry="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <h3>Usage limits</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner"><ul><li>Free limit: 10 active voice notes</li><li>Maximum duration per note: 30 seconds</li><li>These limits may evolve with future app offerings</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Liability</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">Souv'nir shall not be held liable for:<ul><li>Data loss due to circumstances beyond our control</li><li>Your use of the application</li><li>Content created by users</li></ul></div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+          <h3>Termination</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">We reserve the right to suspend or delete your account in case of violation of these terms. You can delete your account at any time.</div></div>
+      </div>
+      <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">
+          <div class="section-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+          <h3>Governing law</h3>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="section-body"><div class="section-body-inner">These terms are governed by French law. Any dispute shall be submitted to the competent courts of Paris, France.</div></div>
+      </div>
+      <div class="updated"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Last updated: May 2025</div>
     </div>
 
-    <div class="contact">
+    <div class="contact-card">
       <p class="contact-label-fr">Une question ? Contactez-nous</p>
       <p class="contact-label-en" style="display:none">Questions? Contact us</p>
-      <a href="mailto:support@djabelsolutions.fr">support@djabelsolutions.fr</a>
+      <a href="mailto:support@djabelsolutions.fr">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        support@djabelsolutions.fr
+      </a>
     </div>
 
     <div class="footer">
-      &copy; 2025 Souvnir &mdash; Djabel Solutions
+      <div class="divider"></div>
+      &copy; 2025 Souv'nir &mdash; Djabel Solutions
     </div>
   </div>
 
@@ -382,20 +793,20 @@ You agree not to post content that is:
 
     function setLang(lang) {
       currentLang = lang;
-      document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.lang-switch button')[lang === 'fr' ? 0 : 1].classList.add('active');
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.lang-btn')[lang === 'fr' ? 0 : 1].classList.add('active');
       document.querySelectorAll('.tab-fr').forEach(el => el.style.display = lang === 'fr' ? '' : 'none');
       document.querySelectorAll('.tab-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
       document.querySelector('.contact-label-fr').style.display = lang === 'fr' ? '' : 'none';
       document.querySelector('.contact-label-en').style.display = lang === 'en' ? '' : 'none';
-      document.querySelector('.logo p').textContent = lang === 'fr' ? 'Documents juridiques' : 'Legal documents';
+      document.querySelector('.header .subtitle').textContent = lang === 'fr' ? 'Documents juridiques' : 'Legal documents';
       updatePage();
     }
 
     function setTab(tab) {
       currentTab = tab;
-      document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tabs button')[tab === 'privacy' ? 0 : 1].classList.add('active');
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn')[tab === 'privacy' ? 0 : 1].classList.add('active');
       updatePage();
     }
 
@@ -403,6 +814,11 @@ You agree not to post content that is:
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       const target = document.getElementById(currentLang + '-' + currentTab);
       if (target) target.classList.add('active');
+    }
+
+    function toggleSection(header) {
+      const section = header.parentElement;
+      section.classList.toggle('open');
     }
   </script>
 </body>
