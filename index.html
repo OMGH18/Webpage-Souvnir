@@ -4,45 +4,249 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Souvnir — Legal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
-    :root { --bg: #FAFAF8; --text: #1A1A1A; --muted: #6B6B6B; --accent: #C87941; --card: #FFFFFF; --border: #E8E4DF; }
+    :root {
+      --bg: #FAF9F6;
+      --text: #1A1A1A;
+      --muted: #6B6B6B;
+      --accent: #C87941;
+      --accent-light: rgba(200, 121, 65, 0.08);
+      --card: #FFFFFF;
+      --border: #E8E4DF;
+      --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.03);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
-    .container { max-width: 720px; margin: 0 auto; padding: 40px 24px 80px; }
-    .logo { text-align: center; margin-bottom: 40px; }
-    .logo h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }
-    .logo h1 span { color: var(--accent); }
-    .lang-switch { text-align: center; margin-bottom: 32px; }
-    .lang-switch button { background: none; border: 1px solid var(--border); padding: 8px 20px; margin: 0 4px; border-radius: 20px; cursor: pointer; font-size: 14px; color: var(--muted); transition: all 0.2s; }
-    .lang-switch button.active { background: var(--accent); color: white; border-color: var(--accent); }
-    .tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 40px; }
-    .tabs button { background: none; border: 1px solid var(--border); padding: 10px 24px; border-radius: 24px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--muted); transition: all 0.2s; }
-    .tabs button.active { background: var(--text); color: white; border-color: var(--text); }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .logo h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo h1 span {
+      color: var(--accent);
+    }
+
+    .logo p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 6px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .lang-switch {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .lang-switch button {
+      background: none;
+      border: 1px solid var(--border);
+      padding: 8px 22px;
+      margin: 0 4px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all 0.25s ease;
+    }
+
+    .lang-switch button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .lang-switch button.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 44px;
+    }
+
+    .tabs button {
+      background: none;
+      border: 1px solid var(--border);
+      padding: 10px 28px;
+      border-radius: 24px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all 0.25s ease;
+    }
+
+    .tabs button:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    .tabs button.active {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+
     .page { display: none; }
-    .page.active { display: block; }
-    .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-    .section h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
-    .section p { font-size: 15px; color: var(--muted); white-space: pre-line; }
-    .updated { text-align: center; margin-top: 32px; font-size: 13px; color: var(--muted); }
-    .contact { text-align: center; margin-top: 16px; }
-    .contact a { color: var(--accent); text-decoration: none; }
+    .page.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .section:hover {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.05);
+    }
+
+    .section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section h3::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 16px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .section p {
+      font-size: 14.5px;
+      color: var(--muted);
+      white-space: pre-line;
+      line-height: 1.8;
+    }
+
+    .updated {
+      text-align: center;
+      margin-top: 36px;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .contact {
+      text-align: center;
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--accent-light);
+      border-radius: 12px;
+    }
+
+    .contact p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .contact a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: opacity 0.2s;
+    }
+
+    .contact a:hover {
+      opacity: 0.8;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
     @media (prefers-color-scheme: dark) {
-      :root { --bg: #1A1A1A; --text: #F0EDE8; --muted: #A0A0A0; --card: #252525; --border: #333; }
+      :root {
+        --bg: #141413;
+        --text: #F0EDE8;
+        --muted: #A0A0A0;
+        --card: #1E1E1D;
+        --border: #2E2E2C;
+        --accent-light: rgba(200, 121, 65, 0.1);
+        --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 12px rgba(0,0,0,0.15);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 40px 16px 80px; }
+      .logo h1 { font-size: 32px; }
+      .section { padding: 22px 20px; }
+      .tabs button { padding: 10px 20px; font-size: 13px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="logo"><h1>Souv<span>'</span>nir</h1></div>
+    <div class="logo">
+      <h1>Souv<span>'</span>nir</h1>
+      <p>Documents juridiques</p>
+    </div>
 
     <div class="lang-switch">
-      <button class="active" onclick="setLang('fr')">Francais</button>
+      <button class="active" onclick="setLang('fr')">Fran&ccedil;ais</button>
       <button onclick="setLang('en')">English</button>
     </div>
 
     <div class="tabs">
       <button class="active" onclick="setTab('privacy')">
-        <span class="tab-fr">Confidentialite</span>
+        <span class="tab-fr">Confidentialit&eacute;</span>
         <span class="tab-en" style="display:none">Privacy</span>
       </button>
       <button onclick="setTab('terms')">
@@ -53,82 +257,82 @@
 
     <!-- FR Privacy -->
     <div class="page active" id="fr-privacy">
-      <div class="section"><h3>Introduction</h3><p>Souvnir ("nous", "notre", "l'application") s'engage a proteger la vie privee de ses utilisateurs. Cette politique decrit comment nous collectons, utilisons et protegeons vos informations personnelles.</p></div>
-      <div class="section"><h3>Donnees collectees</h3><p>• Informations de compte : adresse e-mail, nom d'affichage
-• Notes vocales : enregistrements audio que vous creez
-• Donnees de localisation : coordonnees GPS associees a vos notes vocales
-• Donnees d'utilisation : interactions avec l'application pour ameliorer nos services</p></div>
-      <div class="section"><h3>Utilisation des donnees</h3><p>Vos donnees sont utilisees exclusivement pour :
-• Fournir et ameliorer les fonctionnalites de l'application
-• Associer vos notes vocales aux lieux choisis
-• Permettre le partage de souvenirs avec vos amis
-• Vous envoyer des notifications pertinentes (si activees)</p></div>
-      <div class="section"><h3>Stockage et securite</h3><p>Vos donnees sont stockees de maniere securisee via Supabase, avec chiffrement en transit et au repos. Les notes vocales sont stockees dans un espace de stockage securise et ne sont accessibles qu'a vous et aux destinataires que vous avez choisis.</p></div>
-      <div class="section"><h3>Partage des donnees</h3><p>Nous ne vendons jamais vos donnees personnelles. Vos notes vocales ne sont partagees qu'avec les destinataires que vous designez explicitement. Nous ne partageons pas vos donnees avec des tiers a des fins publicitaires.</p></div>
-      <div class="section"><h3>Vos droits</h3><p>• Acceder a vos donnees personnelles
-• Supprimer votre compte et toutes les donnees associees
-• Modifier vos informations de profil
-• Retirer votre consentement a tout moment
+      <div class="section"><h3>Introduction</h3><p>Souvnir (&laquo; nous &raquo;, &laquo; notre &raquo;, &laquo; l'application &raquo;) s'engage &agrave; prot&eacute;ger la vie priv&eacute;e de ses utilisateurs. Cette politique d&eacute;crit comment nous collectons, utilisons et prot&eacute;geons vos informations personnelles.</p></div>
+      <div class="section"><h3>Donn&eacute;es collect&eacute;es</h3><p>&bull; Informations de compte : adresse e-mail, nom d'affichage
+&bull; Notes vocales : enregistrements audio que vous cr&eacute;ez
+&bull; Donn&eacute;es de localisation : coordonn&eacute;es GPS associ&eacute;es &agrave; vos notes vocales
+&bull; Donn&eacute;es d'utilisation : interactions avec l'application pour am&eacute;liorer nos services</p></div>
+      <div class="section"><h3>Utilisation des donn&eacute;es</h3><p>Vos donn&eacute;es sont utilis&eacute;es exclusivement pour :
+&bull; Fournir et am&eacute;liorer les fonctionnalit&eacute;s de l'application
+&bull; Associer vos notes vocales aux lieux choisis
+&bull; Permettre le partage de souvenirs avec vos amis
+&bull; Vous envoyer des notifications pertinentes (si activ&eacute;es)</p></div>
+      <div class="section"><h3>Stockage et s&eacute;curit&eacute;</h3><p>Vos donn&eacute;es sont stock&eacute;es de mani&egrave;re s&eacute;curis&eacute;e via Supabase, avec chiffrement en transit et au repos. Les notes vocales sont stock&eacute;es dans un espace de stockage s&eacute;curis&eacute; et ne sont accessibles qu'&agrave; vous et aux destinataires que vous avez choisis.</p></div>
+      <div class="section"><h3>Partage des donn&eacute;es</h3><p>Nous ne vendons jamais vos donn&eacute;es personnelles. Vos notes vocales ne sont partag&eacute;es qu'avec les destinataires que vous d&eacute;signez explicitement. Nous ne partageons pas vos donn&eacute;es avec des tiers &agrave; des fins publicitaires.</p></div>
+      <div class="section"><h3>Vos droits</h3><p>&bull; Acc&eacute;der &agrave; vos donn&eacute;es personnelles
+&bull; Supprimer votre compte et toutes les donn&eacute;es associ&eacute;es
+&bull; Modifier vos informations de profil
+&bull; Retirer votre consentement &agrave; tout moment
 
-Pour exercer ces droits, contactez-nous a souvnir.app@gmail.com</p></div>
-      <div class="section"><h3>Localisation</h3><p>L'application utilise votre position geographique uniquement pour :
-• Associer un lieu a vos notes vocales
-• Vous notifier quand vous etes proche d'un souvenir
+Pour exercer ces droits, contactez-nous &agrave; support@djabelsolutions.fr</p></div>
+      <div class="section"><h3>Localisation</h3><p>L'application utilise votre position g&eacute;ographique uniquement pour :
+&bull; Associer un lieu &agrave; vos notes vocales
+&bull; Vous notifier quand vous &ecirc;tes proche d'un souvenir
 
-Vous pouvez desactiver l'acces a la localisation a tout moment dans les reglages de votre appareil.</p></div>
-      <div class="section"><h3>Modifications</h3><p>Nous pouvons mettre a jour cette politique de confidentialite. Les modifications importantes seront notifiees via l'application.</p></div>
-      <div class="updated">Derniere mise a jour : mai 2025</div>
+Vous pouvez d&eacute;sactiver l'acc&egrave;s &agrave; la localisation &agrave; tout moment dans les r&eacute;glages de votre appareil.</p></div>
+      <div class="section"><h3>Modifications</h3><p>Nous pouvons mettre &agrave; jour cette politique de confidentialit&eacute;. Les modifications importantes seront notifi&eacute;es via l'application.</p></div>
+      <div class="updated">Derni&egrave;re mise &agrave; jour : mai 2025</div>
     </div>
 
     <!-- FR Terms -->
     <div class="page" id="fr-terms">
-      <div class="section"><h3>Acceptation</h3><p>En utilisant Souvnir, vous acceptez les presentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'application.</p></div>
-      <div class="section"><h3>Description du service</h3><p>Souvnir est une application permettant de creer des notes vocales geolocalisees et de les partager avec vos amis. L'application est fournie "en l'etat" et peut etre modifiee ou interrompue a tout moment.</p></div>
-      <div class="section"><h3>Compte utilisateur</h3><p>• Vous devez fournir des informations exactes lors de l'inscription
-• Vous etes responsable de la securite de votre compte
-• Un seul compte par personne est autorise
-• Vous devez avoir au moins 13 ans pour utiliser l'application</p></div>
-      <div class="section"><h3>Contenu utilisateur</h3><p>Vous conservez la propriete de vos notes vocales. En utilisant Souvnir, vous nous accordez une licence limitee pour stocker et transmettre votre contenu aux destinataires designes.
+      <div class="section"><h3>Acceptation</h3><p>En utilisant Souvnir, vous acceptez les pr&eacute;sentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'application.</p></div>
+      <div class="section"><h3>Description du service</h3><p>Souvnir est une application permettant de cr&eacute;er des notes vocales g&eacute;olocalis&eacute;es et de les partager avec vos amis. L'application est fournie &laquo; en l'&eacute;tat &raquo; et peut &ecirc;tre modifi&eacute;e ou interrompue &agrave; tout moment.</p></div>
+      <div class="section"><h3>Compte utilisateur</h3><p>&bull; Vous devez fournir des informations exactes lors de l'inscription
+&bull; Vous &ecirc;tes responsable de la s&eacute;curit&eacute; de votre compte
+&bull; Un seul compte par personne est autoris&eacute;
+&bull; Vous devez avoir au moins 13 ans pour utiliser l'application</p></div>
+      <div class="section"><h3>Contenu utilisateur</h3><p>Vous conservez la propri&eacute;t&eacute; de vos notes vocales. En utilisant Souvnir, vous nous accordez une licence limit&eacute;e pour stocker et transmettre votre contenu aux destinataires d&eacute;sign&eacute;s.
 
-Vous vous engagez a ne pas publier de contenu :
-• Illegal, menacant ou harcelant
-• Portant atteinte aux droits d'autrui
-• Contenant des virus ou du code malveillant</p></div>
-      <div class="section"><h3>Limites d'utilisation</h3><p>• Limite gratuite : 10 notes vocales actives
-• Duree maximale par note : 30 secondes
-• Ces limites pourront evoluer avec les futures offres de l'application</p></div>
-      <div class="section"><h3>Responsabilite</h3><p>Souvnir ne saurait etre tenu responsable :
-• De la perte de donnees due a des circonstances independantes de notre volonte
-• De l'utilisation que vous faites de l'application
-• Du contenu cree par les utilisateurs</p></div>
-      <div class="section"><h3>Resiliation</h3><p>Nous nous reservons le droit de suspendre ou supprimer votre compte en cas de violation de ces conditions. Vous pouvez supprimer votre compte a tout moment.</p></div>
-      <div class="section"><h3>Droit applicable</h3><p>Ces conditions sont regies par le droit francais. Tout litige sera soumis aux tribunaux competents de Paris, France.</p></div>
-      <div class="updated">Derniere mise a jour : mai 2025</div>
+Vous vous engagez &agrave; ne pas publier de contenu :
+&bull; Ill&eacute;gal, mena&ccedil;ant ou harcelant
+&bull; Portant atteinte aux droits d'autrui
+&bull; Contenant des virus ou du code malveillant</p></div>
+      <div class="section"><h3>Limites d'utilisation</h3><p>&bull; Limite gratuite : 10 notes vocales actives
+&bull; Dur&eacute;e maximale par note : 30 secondes
+&bull; Ces limites pourront &eacute;voluer avec les futures offres de l'application</p></div>
+      <div class="section"><h3>Responsabilit&eacute;</h3><p>Souvnir ne saurait &ecirc;tre tenu responsable :
+&bull; De la perte de donn&eacute;es due &agrave; des circonstances ind&eacute;pendantes de notre volont&eacute;
+&bull; De l'utilisation que vous faites de l'application
+&bull; Du contenu cr&eacute;&eacute; par les utilisateurs</p></div>
+      <div class="section"><h3>R&eacute;siliation</h3><p>Nous nous r&eacute;servons le droit de suspendre ou supprimer votre compte en cas de violation de ces conditions. Vous pouvez supprimer votre compte &agrave; tout moment.</p></div>
+      <div class="section"><h3>Droit applicable</h3><p>Ces conditions sont r&eacute;gies par le droit fran&ccedil;ais. Tout litige sera soumis aux tribunaux comp&eacute;tents de Paris, France.</p></div>
+      <div class="updated">Derni&egrave;re mise &agrave; jour : mai 2025</div>
     </div>
 
     <!-- EN Privacy -->
     <div class="page" id="en-privacy">
       <div class="section"><h3>Introduction</h3><p>Souvnir ("we", "our", "the app") is committed to protecting the privacy of its users. This policy describes how we collect, use, and protect your personal information.</p></div>
-      <div class="section"><h3>Data collected</h3><p>• Account information: email address, display name
-• Voice notes: audio recordings you create
-• Location data: GPS coordinates associated with your voice notes
-• Usage data: interactions with the app to improve our services</p></div>
+      <div class="section"><h3>Data collected</h3><p>&bull; Account information: email address, display name
+&bull; Voice notes: audio recordings you create
+&bull; Location data: GPS coordinates associated with your voice notes
+&bull; Usage data: interactions with the app to improve our services</p></div>
       <div class="section"><h3>Use of data</h3><p>Your data is used exclusively to:
-• Provide and improve app features
-• Associate your voice notes with chosen locations
-• Enable sharing souvenirs with your friends
-• Send you relevant notifications (if enabled)</p></div>
+&bull; Provide and improve app features
+&bull; Associate your voice notes with chosen locations
+&bull; Enable sharing souvenirs with your friends
+&bull; Send you relevant notifications (if enabled)</p></div>
       <div class="section"><h3>Storage and security</h3><p>Your data is securely stored via Supabase, with encryption in transit and at rest. Voice notes are stored in secure storage and are only accessible to you and the recipients you have chosen.</p></div>
       <div class="section"><h3>Data sharing</h3><p>We never sell your personal data. Your voice notes are only shared with recipients you explicitly designate. We do not share your data with third parties for advertising purposes.</p></div>
-      <div class="section"><h3>Your rights</h3><p>• Access your personal data
-• Delete your account and all associated data
-• Modify your profile information
-• Withdraw your consent at any time
+      <div class="section"><h3>Your rights</h3><p>&bull; Access your personal data
+&bull; Delete your account and all associated data
+&bull; Modify your profile information
+&bull; Withdraw your consent at any time
 
-To exercise these rights, contact us at souvnir.app@gmail.com</p></div>
+To exercise these rights, contact us at support@djabelsolutions.fr</p></div>
       <div class="section"><h3>Location</h3><p>The app uses your geographic location only to:
-• Associate a place with your voice notes
-• Notify you when you are near a souvenir
+&bull; Associate a place with your voice notes
+&bull; Notify you when you are near a souvenir
 
 You can disable location access at any time in your device settings.</p></div>
       <div class="section"><h3>Changes</h3><p>We may update this privacy policy. Significant changes will be notified through the app.</p></div>
@@ -139,29 +343,37 @@ You can disable location access at any time in your device settings.</p></div>
     <div class="page" id="en-terms">
       <div class="section"><h3>Acceptance</h3><p>By using Souvnir, you agree to these terms of service. If you do not agree to these terms, please do not use the app.</p></div>
       <div class="section"><h3>Service description</h3><p>Souvnir is an application for creating geolocated voice notes and sharing them with friends. The app is provided "as is" and may be modified or discontinued at any time.</p></div>
-      <div class="section"><h3>User account</h3><p>• You must provide accurate information when registering
-• You are responsible for the security of your account
-• Only one account per person is allowed
-• You must be at least 13 years old to use the app</p></div>
+      <div class="section"><h3>User account</h3><p>&bull; You must provide accurate information when registering
+&bull; You are responsible for the security of your account
+&bull; Only one account per person is allowed
+&bull; You must be at least 13 years old to use the app</p></div>
       <div class="section"><h3>User content</h3><p>You retain ownership of your voice notes. By using Souvnir, you grant us a limited license to store and transmit your content to designated recipients.
 
 You agree not to post content that is:
-• Illegal, threatening, or harassing
-• Infringing on the rights of others
-• Containing viruses or malicious code</p></div>
-      <div class="section"><h3>Usage limits</h3><p>• Free limit: 10 active voice notes
-• Maximum duration per note: 30 seconds
-• These limits may evolve with future app offerings</p></div>
+&bull; Illegal, threatening, or harassing
+&bull; Infringing on the rights of others
+&bull; Containing viruses or malicious code</p></div>
+      <div class="section"><h3>Usage limits</h3><p>&bull; Free limit: 10 active voice notes
+&bull; Maximum duration per note: 30 seconds
+&bull; These limits may evolve with future app offerings</p></div>
       <div class="section"><h3>Liability</h3><p>Souvnir shall not be held liable for:
-• Data loss due to circumstances beyond our control
-• Your use of the application
-• Content created by users</p></div>
+&bull; Data loss due to circumstances beyond our control
+&bull; Your use of the application
+&bull; Content created by users</p></div>
       <div class="section"><h3>Termination</h3><p>We reserve the right to suspend or delete your account in case of violation of these terms. You can delete your account at any time.</p></div>
       <div class="section"><h3>Governing law</h3><p>These terms are governed by French law. Any dispute shall be submitted to the competent courts of Paris, France.</p></div>
       <div class="updated">Last updated: May 2025</div>
     </div>
 
-    <div class="contact"><a href="mailto:souvnir.app@gmail.com">souvnir.app@gmail.com</a></div>
+    <div class="contact">
+      <p class="contact-label-fr">Une question ? Contactez-nous</p>
+      <p class="contact-label-en" style="display:none">Questions? Contact us</p>
+      <a href="mailto:support@djabelsolutions.fr">support@djabelsolutions.fr</a>
+    </div>
+
+    <div class="footer">
+      &copy; 2025 Souvnir &mdash; Djabel Solutions
+    </div>
   </div>
 
   <script>
@@ -174,6 +386,9 @@ You agree not to post content that is:
       document.querySelectorAll('.lang-switch button')[lang === 'fr' ? 0 : 1].classList.add('active');
       document.querySelectorAll('.tab-fr').forEach(el => el.style.display = lang === 'fr' ? '' : 'none');
       document.querySelectorAll('.tab-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+      document.querySelector('.contact-label-fr').style.display = lang === 'fr' ? '' : 'none';
+      document.querySelector('.contact-label-en').style.display = lang === 'en' ? '' : 'none';
+      document.querySelector('.logo p').textContent = lang === 'fr' ? 'Documents juridiques' : 'Legal documents';
       updatePage();
     }
 
