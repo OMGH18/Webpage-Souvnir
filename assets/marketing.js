@@ -63,7 +63,8 @@
         page: document.body.dataset.page || "unknown",
         language: getLanguage(),
         device_type: getDeviceType(),
-        path: window.location.pathname
+        path: window.location.pathname,
+        platform: "web"
       },
       attribution
     );
