@@ -10,6 +10,9 @@
     content="Créez des messages vocaux géolocalisés, attachez-les aux lieux qui comptent et partagez-les. Avec Souvnir, les endroits gardent une voix."
   >
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+  <!-- GOOGLE SEARCH CONSOLE -->
+  <!-- Replace GOOGLE_SITE_VERIFICATION_TOKEN with the token provided by Google -->
+  <meta name="google-site-verification" content="pcTloNXHZt5-mJftzeYjSyv12nVCvS_uqDGeI9lxNEU">
 
   <link rel="canonical" href="https://souvnir.djabelsolutions.fr/">
   <link rel="alternate" hreflang="fr" href="https://souvnir.djabelsolutions.fr/">
@@ -68,15 +71,9 @@
   }
   </script>
 
-  <!--
-    POSTHOG
-    Colle ici le snippet Web officiel fourni dans ton projet PostHog.
-    Je préfère ne pas figer un snippet SDK potentiellement obsolète sans
-    connaître ton host/région exacts.
-
-    marketing.js capturera ensuite automatiquement nos événements via
-    window.posthog.capture().
-  -->
+  <!-- POSTHOG START -->
+  <!-- Paste official PostHog snippet here -->
+  <!-- POSTHOG END -->
 
   <script defer src="/assets/marketing.js"></script>
 </head>
@@ -302,10 +299,19 @@
         <p class="eyebrow">Une autre façon de partager</p>
         <h2>WhatsApp envoie un message maintenant. Souvnir le laisse quelque part.</h2>
       </div>
-      <div class="why-benefits">
-        <p><strong>Le lieu donne du contexte.</strong><span>Un message prend une autre couleur quand il retrouve son décor.</span></p>
-        <p><strong>Le moment de découverte crée la surprise.</strong><span>Il arrive quand on ne l’attend plus, exactement là où il compte.</span></p>
-        <p><strong>La voix garde quelque chose qu’une photo ne garde pas.</strong><span>Une intonation, un rire, une présence.</span></p>
+      <div class="why-comparison">
+        <article class="message-compare message-now">
+          <div class="compare-label">Message classique</div>
+          <div class="compare-message"><span class="compare-avatar"></span><span>“Tu me manques.”</span></div>
+          <div class="compare-route compare-route-now"><span></span></div>
+          <p>Il part maintenant.<br><strong>Puis il disparaît dans la conversation.</strong></p>
+        </article>
+        <article class="message-compare message-place">
+          <div class="compare-label">Un Souvnir</div>
+          <div class="compare-message"><span class="compare-avatar"></span><span>“Écoute-moi ici.”</span></div>
+          <div class="compare-route compare-route-place"><svg class="paper-plane" viewBox="0 0 64 48" aria-hidden="true"><path d="M3 22 59 3 39 45 29 28 3 22Z"/><path d="m29 28 30-25-20 42"/></svg><i></i></div>
+          <p>Il voyage avec le lieu.<br><strong>Et revient quand le moment compte.</strong></p>
+        </article>
       </div>
     </div>
   </section>
