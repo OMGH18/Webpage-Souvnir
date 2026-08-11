@@ -1,16 +1,16 @@
 :root{
-  --bg:#F6F0E8;
-  --bg-soft:#EEE5DA;
-  --paper:#FFFDF9;
-  --ink:#17130F;
-  --muted:#6E655C;
-  --line:rgba(23,19,15,.12);
-  --line-strong:rgba(23,19,15,.20);
-  --accent:#B9663A;
-  --accent-dark:#8E482A;
-  --accent-soft:#E8C8B3;
-  --cream:#FBF7F1;
-  --dark:#1A1511;
+  --bg:#FBE1C9;
+  --bg-soft:#F6D8BD;
+  --paper:#FFF6EC;
+  --ink:#21150E;
+  --muted:#746257;
+  --line:rgba(69,39,22,.12);
+  --line-strong:rgba(69,39,22,.20);
+  --accent:#D66A21;
+  --accent-dark:#A94F18;
+  --accent-soft:#F0B98E;
+  --cream:#FBE1C9;
+  --dark:#1B120D;
   --white:#FFF;
   --radius:26px;
   --radius-sm:16px;
@@ -119,7 +119,7 @@ p{
   z-index:100;
   top:0;
   border-bottom:1px solid transparent;
-  background:rgba(246,240,232,.82);
+  background:rgba(251,225,201,.82);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
 }
@@ -147,29 +147,13 @@ p{
   letter-spacing:-.025em;
 }
 
-.brand-mark{
-  display:grid;
-  width:31px;
-  height:31px;
-  place-items:center;
-  border-radius:10px;
-  color:#fff;
-  background:var(--accent);
-}
-
-.brand-mark svg{
-  width:20px;
-  height:20px;
-}
-
-.brand-pin{
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.7;
-}
-
-.brand-wave{
-  fill:currentColor;
+.brand-app-icon{
+  width:34px;
+  height:34px;
+  display:block;
+  object-fit:cover;
+  border-radius:9px;
+  box-shadow:0 5px 16px rgba(112,61,28,.12);
 }
 
 .desktop-nav{
