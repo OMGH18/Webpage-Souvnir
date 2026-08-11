@@ -80,6 +80,7 @@
 
     <nav class="desktop-nav" aria-label="Main navigation">
       <a href="#how">How it works</a>
+      <a href="#why">Why Souvnir?</a>
       <a href="#ideas">Ideas</a>
       <a href="#privacy">Privacy</a>
       <a href="#faq">FAQ</a>
@@ -142,6 +143,16 @@
       <div class="hero-product" aria-label="Preview of the Souvnir experience">
         <div class="ambient-orbit orbit-one"></div>
         <div class="ambient-orbit orbit-two"></div>
+
+        <div class="hero-flight" aria-hidden="true">
+          <span class="hero-envelope"></span>
+          <svg class="paper-plane" viewBox="0 0 64 48" aria-hidden="true">
+            <path d="M3 22 59 3 39 45 29 28 3 22Z"/>
+            <path d="m29 28 30-25-20 42"/>
+          </svg>
+          <span class="hero-flight-pin"></span>
+          <span class="hero-flight-card">A Souvnir is waiting here</span>
+        </div>
 
         <div class="phone">
           <div class="phone-top">
@@ -222,6 +233,7 @@
         <article class="step-card">
           <span class="step-number">01</span>
           <div>
+            <div class="step-visual step-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
             <h3>Record what you want to leave behind.</h3>
             <p>
               A thought, a story, a recommendation or just a few words.
@@ -233,6 +245,7 @@
         <article class="step-card">
           <span class="step-number">02</span>
           <div>
+            <div class="step-visual step-route" aria-hidden="true"><span></span><i></i></div>
             <h3>Choose the place.</h3>
             <p>
               Pin your Souvnir to the map, exactly where the message makes sense.
@@ -244,6 +257,7 @@
         <article class="step-card">
           <span class="step-number">03</span>
           <div>
+            <div class="step-visual step-discover" aria-hidden="true"><span></span><strong>A Souvnir</strong></div>
             <h3>Let the place do the rest.</h3>
             <p>
               When someone returns nearby, Souvnir reminds them that something is
@@ -251,6 +265,20 @@
             </p>
           </div>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section why-section reveal-section" id="why" data-why-section>
+    <div class="shell why-inner">
+      <div>
+        <p class="eyebrow">A different way to share</p>
+        <h2>WhatsApp sends a message now. Souvnir leaves it somewhere.</h2>
+      </div>
+      <div class="why-benefits">
+        <p><strong>The place gives it context.</strong><span>A message feels different when it finds its original setting.</span></p>
+        <p><strong>The discovery moment brings surprise.</strong><span>It arrives when you least expect it, exactly where it matters.</span></p>
+        <p><strong>Voice keeps what a photo cannot.</strong><span>An intonation, a laugh, a little bit of presence.</span></p>
       </div>
     </div>
   </section>
@@ -264,6 +292,7 @@
 
       <div class="usecases-grid">
         <article class="usecase-card usecase-large" data-usecase="couple">
+          <div class="usecase-illustration illustration-couple" aria-hidden="true"><span>♥</span><i></i></div>
           <div class="usecase-meta"><span>01</span><span>Couples</span></div>
           <h3>Leave a few words where your story began.</h3>
           <p>
@@ -276,6 +305,7 @@
         </article>
 
         <article class="usecase-card" data-usecase="friends">
+          <div class="usecase-illustration illustration-friends" aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="usecase-meta"><span>02</span><span>Friends</span></div>
           <h3>Turn your city into a shared memory map.</h3>
           <p>
@@ -285,6 +315,7 @@
         </article>
 
         <article class="usecase-card" data-usecase="travel">
+          <div class="usecase-illustration illustration-travel" aria-hidden="true"><span></span><b></b></div>
           <div class="usecase-meta"><span>03</span><span>Travel</span></div>
           <h3>Share recommendations exactly when they become useful.</h3>
           <p>
@@ -294,6 +325,7 @@
         </article>
 
         <article class="usecase-card" data-usecase="personal">
+          <div class="usecase-illustration illustration-personal" aria-hidden="true"><i></i><b></b></div>
           <div class="usecase-meta"><span>04</span><span>For yourself</span></div>
           <h3>Build a map that belongs only to you.</h3>
           <p>
@@ -305,7 +337,7 @@
     </div>
   </section>
 
-  <section class="section story-section" data-demo-section>
+  <section class="section story-section reveal-section" data-demo-section data-emotion-section>
     <div class="shell story-grid">
       <div class="story-copy">
         <p class="eyebrow">Why voice changes the memory</p>
@@ -323,12 +355,14 @@
         </p>
       </div>
 
-      <div class="quote-object" aria-hidden="true">
+      <div class="envelope-object" aria-hidden="true"><span class="envelope-flap"></span><span class="envelope-paper"></span></div>
+      <article class="quote-object">
         <div class="quote-location">48.8566° N · 2.3522° E</div>
-        <div class="quote-mark">“</div>
-        <p>Keep this message for the day you come back here.</p>
-        <div class="quote-line"></div>
-      </div>
+        <div class="quote-date">Souvnir · May 14, 2026</div>
+        <p>“If you come back here one day, I hope you think of us.”</p>
+        <div class="quote-audio"><span class="quote-play">▶</span><div class="waveform" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>0:18</span></div>
+        <p class="quote-caption">Fictional message card, shown to illustrate the experience.</p>
+      </article>
     </div>
   </section>
 
@@ -350,6 +384,7 @@
       </div>
 
       <div class="privacy-points">
+        <div class="privacy-symbol" aria-hidden="true"><span></span></div>
         <div><span class="privacy-index">01</span><p>Encrypted in transit and at rest.</p></div>
         <div><span class="privacy-index">02</span><p>No personal data sold.</p></div>
         <div><span class="privacy-index">03</span><p>Account and content deletion available.</p></div>
@@ -367,22 +402,19 @@
         </p>
       </div>
 
-      <div class="pricing-card">
-        <p class="pricing-label">Souvnir Premium</p>
-        <div class="price-row"><strong>€5.99</strong><span>/ month</span></div>
-        <p class="annual-price">or €49.99 / year</p>
-        <div class="pricing-divider"></div>
-        <p>Unlimited Souvnirs</p>
-        <p>Unlimited friends</p>
-
-        <a
-          class="button button-primary appstore-link"
-          href="#"
-          data-appstore
-          data-cta-location="pricing"
-        >
-          Try Souvnir
-        </a>
+      <div class="pricing-plans" data-pricing-section>
+        <article class="pricing-plan pricing-free">
+          <p class="pricing-label">Free</p>
+          <h3>15 Souvnirs, 3 friends</h3>
+          <p>Everything you need to start leaving messages in the places where they belong.</p>
+        </article>
+        <article class="pricing-plan pricing-premium">
+          <p class="pricing-label">Premium</p>
+          <div class="price-row"><strong>€5.99</strong><span>/ month</span></div>
+          <p class="annual-price">or €49.99 / year</p>
+          <p>Unlimited Souvnirs · unlimited friends</p>
+          <a class="button button-primary appstore-link" href="#" data-appstore data-cta-location="pricing">Try Souvnir</a>
+        </article>
       </div>
     </div>
   </section>
@@ -430,6 +462,7 @@
 
   <section class="final-cta">
     <div class="shell final-cta-inner">
+      <div class="final-flight" aria-hidden="true"><span class="final-pin"></span><svg class="paper-plane" viewBox="0 0 64 48"><path d="M3 22 59 3 39 45 29 28 3 22Z"/><path d="m29 28 30-25-20 42"/></svg></div>
       <p class="eyebrow">The next place may already matter</p>
       <h2>Leave something worth coming back to.</h2>
       <p>A message. A voice. A place that will never feel quite the same again.</p>

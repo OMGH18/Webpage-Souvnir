@@ -232,6 +232,59 @@
     }
   }
 
+  function configureEditorialMotion() {
+    if (!("IntersectionObserver" in window)) {
+      document.querySelectorAll(".reveal-section, .step-card").forEach(function (element) {
+        element.classList.add("is-visible");
+      });
+      return;
+    }
+
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.18 }
+    );
+
+    document.querySelectorAll(".reveal-section, .step-card").forEach(function (element) {
+      revealObserver.observe(element);
+    });
+
+    var trackedSections = [
+      { selector: "[data-why-section]", event: "why_souvnir_view" },
+      { selector: "[data-emotion-section]", event: "emotion_section_view" },
+      { selector: "[data-pricing-section]", event: "pricing_view" }
+    ];
+
+    trackedSections.forEach(function (item) {
+      var section = document.querySelector(item.selector);
+
+      if (!section) return;
+
+      var fired = false;
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting || fired) return;
+
+            fired = true;
+            capture(item.event);
+            observer.disconnect();
+          });
+        },
+        { threshold: 0.35 }
+      );
+
+      observer.observe(section);
+    });
+  }
+
   function configureScrollTracking() {
     function calculateScrollPercentage() {
       var doc = document.documentElement;
@@ -294,6 +347,7 @@
   }
 
   function start() {
+    document.documentElement.classList.add("js");
     capture("landing_view");
 
     configureAppStoreLinks();
@@ -301,6 +355,7 @@
     configureFAQTracking();
     configureUseCaseTracking();
     configureDemoTracking();
+    configureEditorialMotion();
     configureScrollTracking();
     configureHeader();
   }
