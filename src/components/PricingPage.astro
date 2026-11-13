@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro'
+import CtaBand from './CtaBand.astro'
+import Faq from './Faq.astro'
+import PricingPanel from './PricingPanel.astro'
+import { LIMITS, PRICES, SITE, formatPrice, type Lang } from '../data/product'
+import { ROUTES } from '../i18n/ui'
+import { breadcrumbs, faqPage, webPage } from '../data/schema'
+
+interface Props { lang: Lang }
+const { lang } = Astro.props
+const fr = lang === 'fr'
+const p = (v: number) => formatPrice(v, lang)
+const path = ROUTES.pricing[lang]
+const premiumMin = `1 min ${LIMITS.premium.seconds - 60}`
+
+const c = fr
+  ? {
+      title: 'Prix de Souvnir : gratuit, et Souvnir+ en option',
+      description: `Souvnir est gratuit jusqu’à ${LIMITS.free.notes} Souvnirs actifs. Souvnir+ coûte ${p(PRICES.monthly)} par mois ou ${p(PRICES.yearly)} par an et retire toutes les limites. Le détail.`,
+      eyebrow: 'Prix',
+      h1: 'Combien coûte Souvnir ?',
+      lede: `<strong>Souvnir est gratuit : tu peux avoir jusqu’à ${LIMITS.free.notes} Souvnirs actifs et ${LIMITS.free.friends} amis, sans publicité.</strong> Souvnir+, en option, coûte ${p(PRICES.monthly)} par mois ou ${p(PRICES.yearly)} par an : Souvnirs et amis illimités, vocaux plus longs, et tes Souvnirs restent après écoute.`,
+      compareTitle: 'Gratuit ou Souvnir+ : le détail',
+      cols: ['', 'Gratuit', 'Souvnir+'],
+      rows: [
+        ['Souvnirs actifs', `Jusqu’à ${LIMITS.free.notes}`, 'Illimités'],
+        ['Amis', `${LIMITS.free.friends}`, 'Illimités'],
+        ['Durée d’un vocal', `${LIMITS.free.seconds} secondes`, premiumMin],
+        ['Après écoute sur place', 'Le Souvnir s’efface', 'Il reste : réécoute-le sur place'],
+        ['Photo, carte, notifications', 'Oui', 'Oui'],
+        ['Publicité', 'Aucune', 'Aucune'],
+      ],
+      extras: [
+        { t: 'Pourquoi un Souvnir gratuit s’efface ?', b: 'En gratuit, écouter un Souvnir sur place libère sa place, pour que tu puisses en recevoir d’autres. Avec Souvnir+, tu gardes ce que tu as écouté.' },
+        { t: 'Sans publicité, gratuit ou payant', b: 'Souvnir n’affiche pas de publicité et ne vend pas tes données.' },
+      ],
+      faqTitle: 'Questions sur les prix',
+      faq: [
+        { q: 'Souvnir est-il vraiment gratuit ?', a: `Oui, sans publicité : jusqu’à ${LIMITS.free.notes} Souvnirs actifs, ${LIMITS.free.friends} amis et des vocaux de ${LIMITS.free.seconds} secondes. Souvnir+ est une option.` },
+        { q: 'Combien coûte Souvnir+ ?', a: `${p(PRICES.monthly)} par mois ou ${p(PRICES.yearly)} par an en France (soit ${p(PRICES.yearlyPerMonth)} par mois). L’App Store affiche le prix exact dans ta devise avant l’achat.` },
+        { q: 'Comment résilier Souvnir+ ?', a: 'Depuis les réglages d’abonnement de ton compte Apple (Réglages de l’iPhone > ton nom > Abonnements), à tout moment. Souvnir+ reste actif jusqu’à la fin de la période payée.' },
+        { q: 'Que deviennent mes Souvnirs si j’arrête Souvnir+ ?', a: `Tes Souvnirs existants restent accessibles tant que ton compte est actif. Si tu dépasses les limites du plan gratuit, il faudra en supprimer avant d’en créer de nouveaux.` },
+      ],
+    }
+  : {
+      title: 'Souvnir pricing: free, with optional Souvnir+',
+      description: `Souvnir is free for up to ${LIMITS.free.notes} active Souvnirs. Souvnir+ costs ${p(PRICES.monthly)} per month or ${p(PRICES.yearly)} per year and removes every limit. The details.`,
+      eyebrow: 'Pricing',
+      h1: 'How much does Souvnir cost?',
+      lede: `<strong>Souvnir is free: up to ${LIMITS.free.notes} active Souvnirs and ${LIMITS.free.friends} friends, with no ads.</strong> The optional Souvnir+ costs ${p(PRICES.monthly)} per month or ${p(PRICES.yearly)} per year: unlimited Souvnirs and friends, longer voice notes, and your Souvnirs stay after listening.`,
+      compareTitle: 'Free vs Souvnir+ in detail',
+      cols: ['', 'Free', 'Souvnir+'],
+      rows: [
+        ['Active Souvnirs', `Up to ${LIMITS.free.notes}`, 'Unlimited'],
+        ['Friends', `${LIMITS.free.friends}`, 'Unlimited'],
+        ['Voice note length', `${LIMITS.free.seconds} seconds`, premiumMin],
+        ['After listening on site', 'The Souvnir is erased', 'It stays: replay it on site'],
+        ['Photo, map, notifications', 'Yes', 'Yes'],
+        ['Ads', 'None', 'None'],
+      ],
+      extras: [
+        { t: 'Why is a free Souvnir erased?', b: 'On the free plan, listening to a Souvnir on site frees up its slot, so you can receive more. With Souvnir+, you keep what you listened to.' },
+        { t: 'No ads, free or paid', b: 'Souvnir shows no ads and never sells your data.' },
+      ],
+      faqTitle: 'Pricing questions',
+      faq: [
+        { q: 'Is Souvnir really free?', a: `Yes, with no ads: up to ${LIMITS.free.notes} active Souvnirs, ${LIMITS.free.friends} friends and ${LIMITS.free.seconds}-second voice notes. Souvnir+ is optional.` },
+        { q: 'How much is Souvnir+?', a: `${p(PRICES.monthly)} per month or ${p(PRICES.yearly)} per year in France (${p(PRICES.yearlyPerMonth)} per month). The App Store shows the exact price in your currency before you buy.` },
+        { q: 'How do I cancel Souvnir+?', a: 'From the subscription settings of your Apple account (iPhone Settings > your name > Subscriptions), at any time. Souvnir+ stays active until the end of the paid period.' },
+        { q: 'What happens to my Souvnirs if I stop Souvnir+?', a: 'Your existing Souvnirs stay available as long as your account is active. If you are over the free limits, you will need to delete some before creating new ones.' },
+      ],
+    }
+
+const jsonLd = [
+  webPage(path, c.title, lang),
+  breadcrumbs([{ name: 'Souvnir', path: ROUTES.home[lang] }, { name: c.eyebrow, path }]),
+  faqPage(`${SITE}${path}#faq`, c.faq),
+]
+---
+
+<Base lang={lang} title={c.title} description={c.description} path={path} alternates={{ fr: ROUTES.pricing.fr, en: ROUTES.pricing.en }} jsonLd={jsonLd}>
+  <section class="section top">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <h1 class="display">{c.h1}</h1>
+        <p class="lede" set:html={c.lede} />
+      </div>
+      <PricingPanel lang={lang} showDetailsLink={false} />
+    </div>
+  </section>
+
+  <section class="section compare">
+    <div class="wrap">
+      <div class="section-head"><h2 class="display">{c.compareTitle}</h2></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>{c.cols.map((col) => <th scope="col">{col}</th>)}</tr></thead>
+          <tbody>{c.rows.map((r) => <tr><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div class="grid-2 extras">
+        {c.extras.map((e) => <div class="card extra"><h3>{e.t}</h3><p class="muted">{e.b}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <Faq items={c.faq} title={c.faqTitle} />
+  <CtaBand lang={lang} />
+</Base>
+
+<style>
+  .top { overflow: hidden; }
+  .glow { position: absolute; top: -40%; left: 30%; width: 900px; height: 900px; max-width: 120vw; background: radial-gradient(closest-side, rgba(201, 168, 76, 0.2), transparent); pointer-events: none; }
+  .top .wrap { position: relative; }
+  .top .section-head { margin-bottom: 26px; }
+  .compare { padding-top: 0; }
+  .extras { margin-top: 14px; }
+  .extra { padding: 22px; }
+  .extra h3 { margin-bottom: 6px; }
+  .extra p { margin: 0; }
+</style>

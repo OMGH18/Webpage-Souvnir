@@ -1,0 +1,21 @@
+---
+export interface FaqItem { q: string; a: string }
+interface Props { items: FaqItem[]; title: string }
+const { items, title } = Astro.props
+---
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="display">{title}</h2>
+    </div>
+    <div class="faq">
+      {items.map((it) => (
+        <details open>
+          <summary>{it.q}</summary>
+          <p>{it.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

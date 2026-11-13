@@ -1,0 +1,206 @@
+{
+ "privacy-fr": [
+  {
+   "title": "Introduction",
+   "html": "Souv'nir s'engage &agrave; prot&eacute;ger la vie priv&eacute;e de ses utilisateurs. Cette politique d&eacute;crit comment nous collectons, utilisons et prot&eacute;geons vos informations personnelles."
+  },
+  {
+   "title": "Données collectées",
+   "html": "<ul><li>Informations de compte : adresse e-mail, nom d'affichage</li><li>Notes vocales : enregistrements audio que vous cr&eacute;ez</li><li>Donn&eacute;es de localisation : coordonn&eacute;es GPS associ&eacute;es &agrave; vos notes vocales</li><li>Donn&eacute;es d'utilisation : interactions avec l'application pour am&eacute;liorer nos services</li></ul>"
+  },
+  {
+   "title": "Utilisation des données",
+   "html": "Vos donn&eacute;es sont utilis&eacute;es exclusivement pour&nbsp;:<ul><li>Fournir et am&eacute;liorer les fonctionnalit&eacute;s de l'application</li><li>Associer vos notes vocales aux lieux choisis</li><li>Permettre le partage de souvenirs avec vos amis</li><li>Vous envoyer des notifications pertinentes (si activ&eacute;es)</li></ul>"
+  },
+  {
+   "title": "Stockage et sécurité",
+   "html": "Vos donn&eacute;es sont stock&eacute;es de mani&egrave;re s&eacute;curis&eacute;e via Supabase, avec chiffrement en transit et au repos. Les notes vocales sont stock&eacute;es dans un espace de stockage s&eacute;curis&eacute; et ne sont accessibles qu'&agrave; vous et aux destinataires que vous avez choisis."
+  },
+  {
+   "title": "Partage des données",
+   "html": "Nous ne vendons jamais vos donn&eacute;es personnelles. Vos notes vocales ne sont partag&eacute;es qu'avec les destinataires que vous d&eacute;signez explicitement. Nous ne partageons pas vos donn&eacute;es avec des tiers &agrave; des fins publicitaires."
+  },
+  {
+   "title": "Vos droits",
+   "html": "<ul><li>Acc&eacute;der &agrave; vos donn&eacute;es personnelles</li><li>Supprimer votre compte et toutes les donn&eacute;es associ&eacute;es</li><li>Modifier vos informations de profil</li><li>Retirer votre consentement &agrave; tout moment</li></ul><p class=\"note\">Pour exercer ces droits, contactez-nous &agrave; <a href=\"mailto:support@djabelsolutions.fr\">support@djabelsolutions.fr</a></p>"
+  },
+  {
+   "title": "Localisation",
+   "html": "L'application utilise votre position g&eacute;ographique uniquement pour&nbsp;:<ul><li>Associer un lieu &agrave; vos notes vocales</li><li>Vous notifier quand vous &ecirc;tes proche d'un souvenir</li></ul><p class=\"note\">Vous pouvez d&eacute;sactiver l'acc&egrave;s &agrave; la localisation &agrave; tout moment dans les r&eacute;glages de votre appareil.</p>"
+  },
+  {
+   "title": "Modifications",
+   "html": "Nous pouvons mettre &agrave; jour cette politique de confidentialit&eacute;. Les modifications importantes seront notifi&eacute;es via l'application."
+  }
+ ],
+ "privacy-en": [
+  {
+   "title": "Introduction",
+   "html": "Souv'nir is committed to protecting the privacy of its users. This policy describes how we collect, use, and protect your personal information."
+  },
+  {
+   "title": "Data collected",
+   "html": "<ul><li>Account information: email address, display name</li><li>Voice notes: audio recordings you create</li><li>Location data: GPS coordinates associated with your voice notes</li><li>Usage data: interactions with the app to improve our services</li></ul>"
+  },
+  {
+   "title": "Use of data",
+   "html": "Your data is used exclusively to:<ul><li>Provide and improve app features</li><li>Associate your voice notes with chosen locations</li><li>Enable sharing souvenirs with your friends</li><li>Send you relevant notifications (if enabled)</li></ul>"
+  },
+  {
+   "title": "Storage and security",
+   "html": "Your data is securely stored via Supabase, with encryption in transit and at rest. Voice notes are stored in secure storage and are only accessible to you and the recipients you have chosen."
+  },
+  {
+   "title": "Data sharing",
+   "html": "We never sell your personal data. Your voice notes are only shared with recipients you explicitly designate. We do not share your data with third parties for advertising purposes."
+  },
+  {
+   "title": "Your rights",
+   "html": "<ul><li>Access your personal data</li><li>Delete your account and all associated data</li><li>Modify your profile information</li><li>Withdraw your consent at any time</li></ul><p class=\"note\">To exercise these rights, contact us at <a href=\"mailto:support@djabelsolutions.fr\">support@djabelsolutions.fr</a></p>"
+  },
+  {
+   "title": "Location",
+   "html": "The app uses your geographic location only to:<ul><li>Associate a place with your voice notes</li><li>Notify you when you are near a souvenir</li></ul><p class=\"note\">You can disable location access at any time in your device settings.</p>"
+  },
+  {
+   "title": "Changes",
+   "html": "We may update this privacy policy. Significant changes will be notified through the app."
+  }
+ ],
+ "terms-fr": [
+  {
+   "title": "Acceptation",
+   "html": "En utilisant Souv'nir, vous acceptez les pr&eacute;sentes conditions d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'application."
+  },
+  {
+   "title": "Description du service",
+   "html": "Souv'nir est une application permettant de cr&eacute;er des notes vocales g&eacute;olocalis&eacute;es et de les partager avec vos amis. L'application est fournie &laquo;&nbsp;en l'&eacute;tat&nbsp;&raquo; et peut &ecirc;tre modifi&eacute;e ou interrompue &agrave; tout moment."
+  },
+  {
+   "title": "Compte utilisateur",
+   "html": "<ul><li>Vous devez fournir des informations exactes lors de l'inscription</li><li>Vous &ecirc;tes responsable de la s&eacute;curit&eacute; de votre compte</li><li>Un seul compte par personne est autoris&eacute;</li><li>Vous devez avoir au moins 13 ans pour utiliser l'application</li></ul>"
+  },
+  {
+   "title": "Contenu utilisateur",
+   "html": "Vous conservez la propri&eacute;t&eacute; de vos notes vocales. En utilisant Souv'nir, vous nous accordez une licence limit&eacute;e pour stocker et transmettre votre contenu aux destinataires d&eacute;sign&eacute;s.<p class=\"note\">Vous vous engagez &agrave; ne pas publier de contenu&nbsp;:</p><ul><li>Ill&eacute;gal, mena&ccedil;ant ou harcelant</li><li>Portant atteinte aux droits d'autrui</li><li>Contenant des virus ou du code malveillant</li></ul>"
+  },
+  {
+   "title": "Limites d'utilisation",
+   "html": "<ul><li>Limite gratuite : 10 notes vocales actives</li><li>Dur&eacute;e maximale par note : 30 secondes</li><li>Ces limites pourront &eacute;voluer avec les futures offres de l'application</li></ul>"
+  },
+  {
+   "title": "Responsabilité",
+   "html": "Souv'nir ne saurait &ecirc;tre tenu responsable&nbsp;:<ul><li>De la perte de donn&eacute;es due &agrave; des circonstances ind&eacute;pendantes de notre volont&eacute;</li><li>De l'utilisation que vous faites de l'application</li><li>Du contenu cr&eacute;&eacute; par les utilisateurs</li></ul>"
+  },
+  {
+   "title": "Résiliation",
+   "html": "Nous nous r&eacute;servons le droit de suspendre ou supprimer votre compte en cas de violation de ces conditions. Vous pouvez supprimer votre compte &agrave; tout moment."
+  },
+  {
+   "title": "Droit applicable",
+   "html": "Ces conditions sont r&eacute;gies par le droit fran&ccedil;ais. Tout litige sera soumis aux tribunaux comp&eacute;tents de Paris, France."
+  }
+ ],
+ "terms-en": [
+  {
+   "title": "Acceptance",
+   "html": "By using Souv'nir, you agree to these terms of service. If you do not agree to these terms, please do not use the app."
+  },
+  {
+   "title": "Service description",
+   "html": "Souv'nir is an application for creating geolocated voice notes and sharing them with friends. The app is provided &ldquo;as is&rdquo; and may be modified or discontinued at any time."
+  },
+  {
+   "title": "User account",
+   "html": "<ul><li>You must provide accurate information when registering</li><li>You are responsible for the security of your account</li><li>Only one account per person is allowed</li><li>You must be at least 13 years old to use the app</li></ul>"
+  },
+  {
+   "title": "User content",
+   "html": "You retain ownership of your voice notes. By using Souv'nir, you grant us a limited license to store and transmit your content to designated recipients.<p class=\"note\">You agree not to post content that is:</p><ul><li>Illegal, threatening, or harassing</li><li>Infringing on the rights of others</li><li>Containing viruses or malicious code</li></ul>"
+  },
+  {
+   "title": "Usage limits",
+   "html": "<ul><li>Free limit: 10 active voice notes</li><li>Maximum duration per note: 30 seconds</li><li>These limits may evolve with future app offerings</li></ul>"
+  },
+  {
+   "title": "Liability",
+   "html": "Souv'nir shall not be held liable for:<ul><li>Data loss due to circumstances beyond our control</li><li>Your use of the application</li><li>Content created by users</li></ul>"
+  },
+  {
+   "title": "Termination",
+   "html": "We reserve the right to suspend or delete your account in case of violation of these terms. You can delete your account at any time."
+  },
+  {
+   "title": "Governing law",
+   "html": "These terms are governed by French law. Any dispute shall be submitted to the competent courts of Paris, France."
+  }
+ ],
+ "support-fr": [
+  {
+   "title": "Prendre en main Souv'nir",
+   "html": "Souv'nir vous permet d'enregistrer une note vocale et de l'attacher &agrave; un lieu. Lorsque vous, ou la personne &agrave; qui vous l'avez adress&eacute;e, repassez &agrave; cet endroit, le souvenir se d&eacute;bloque.<ul><li>Cr&eacute;ez un compte avec votre adresse e-mail</li><li>Autorisez le micro et la localisation lorsque l'application vous le demande</li><li>Enregistrez votre note, choisissez le lieu, puis partagez-la</li></ul>"
+  },
+  {
+   "title": "Compte et connexion",
+   "html": "Si vous n'arrivez pas &agrave; vous connecter&nbsp;:<ul><li>V&eacute;rifiez que l'adresse e-mail saisie est bien celle du compte</li><li>Utilisez l'option de r&eacute;initialisation du mot de passe sur l'&eacute;cran de connexion, puis regardez dans vos courriers ind&eacute;sirables</li><li>Assurez-vous d'utiliser la derni&egrave;re version de l'application</li></ul>Si le probl&egrave;me persiste, &eacute;crivez-nous &agrave; <a href=\"mailto:support@djabelsolutions.fr\">support@djabelsolutions.fr</a> en pr&eacute;cisant l'adresse e-mail du compte concern&eacute;."
+  },
+  {
+   "title": "Autorisations micro et localisation",
+   "html": "Souv'nir a besoin du micro pour enregistrer vos notes vocales, et de la localisation pour y associer un lieu et vous pr&eacute;venir quand vous en approchez. Ces autorisations se modifient &agrave; tout moment dans les r&eacute;glages de votre t&eacute;l&eacute;phone, &agrave; la rubrique consacr&eacute;e &agrave; Souv'nir. Sans acc&egrave;s &agrave; la localisation, les souvenirs g&eacute;olocalis&eacute;s ne peuvent pas se d&eacute;bloquer."
+  },
+  {
+   "title": "Partager un souvenir",
+   "html": "Un souvenir n'est visible que par les destinataires que vous d&eacute;signez explicitement. Si un proche ne re&ccedil;oit rien, v&eacute;rifiez qu'il poss&egrave;de bien un compte Souv'nir et que l'adresse utilis&eacute;e pour le partage est la bonne."
+  },
+  {
+   "title": "Supprimer mon compte et mes données",
+   "html": "Vous pouvez demander la suppression de votre compte et de l'ensemble des donn&eacute;es associ&eacute;es &mdash; notes vocales, lieux, profil. Ouvrez les r&eacute;glages de votre compte dans l'application&nbsp;; si vous n'y trouvez pas l'option, envoyez une demande &agrave; <a href=\"mailto:support@djabelsolutions.fr\">support@djabelsolutions.fr</a> depuis l'adresse e-mail du compte. Nous traitons ces demandes sous 30 jours au plus, et la suppression est d&eacute;finitive."
+  },
+  {
+   "title": "Obtenir une copie de mes données",
+   "html": "&Eacute;crivez-nous &agrave; <a href=\"mailto:support@djabelsolutions.fr\">support@djabelsolutions.fr</a> depuis l'adresse e-mail de votre compte pour recevoir une copie des donn&eacute;es personnelles que nous conservons &agrave; votre sujet. L&agrave; encore, le d&eacute;lai maximal de traitement est de 30 jours."
+  },
+  {
+   "title": "Signaler un bug ou proposer une idée",
+   "html": "Vos retours nous aident beaucoup. Pour qu'un signalement soit exploitable, indiquez&nbsp;:<ul><li>Le mod&egrave;le de t&eacute;l&eacute;phone et la version du syst&egrave;me</li><li>La version de l'application</li><li>Les &eacute;tapes qui reproduisent le probl&egrave;me, et une capture d'&eacute;cran si possible</li></ul>"
+  },
+  {
+   "title": "Délai de réponse",
+   "html": "Souv'nir est d&eacute;velopp&eacute; par Djabel Solutions, une petite &eacute;quipe. Nous r&eacute;pondons g&eacute;n&eacute;ralement sous 2 &agrave; 3 jours ouvr&eacute;s, et au plus tard sous 30 jours pour les demandes portant sur vos donn&eacute;es personnelles."
+  }
+ ],
+ "support-en": [
+  {
+   "title": "Getting started with Souv'nir",
+   "html": "Souv'nir lets you record a voice note and pin it to a place. When you &mdash; or the person you sent it to &mdash; come back to that spot, the memory unlocks.<ul><li>Create an account with your email address</li><li>Allow microphone and location access when the app asks</li><li>Record your note, pick the place, then share it</li></ul>"
+  },
+  {
+   "title": "Account and sign-in",
+   "html": "If you cannot sign in:<ul><li>Check that the email address you entered is the one tied to the account</li><li>Use the password reset option on the sign-in screen, then check your spam folder</li><li>Make sure you are running the latest version of the app</li></ul>If the problem persists, write to <a href=\"mailto:support@djabelsolutions.fr\">support@djabelsolutions.fr</a> and mention the email address of the account."
+  },
+  {
+   "title": "Microphone and location permissions",
+   "html": "Souv'nir needs the microphone to record your voice notes, and location to attach a place to them and notify you when you are nearby. You can change both at any time in your phone's settings, under the Souv'nir entry. Without location access, geolocated memories cannot unlock."
+  },
+  {
+   "title": "Sharing a memory",
+   "html": "A memory is only visible to the recipients you explicitly choose. If someone receives nothing, check that they have a Souv'nir account and that the address used for sharing is the right one."
+  },
+  {
+   "title": "Deleting my account and my data",
+   "html": "You can request deletion of your account and every piece of data attached to it &mdash; voice notes, places, profile. Open your account settings in the app; if you cannot find the option, send a request to <a href=\"mailto:support@djabelsolutions.fr\">support@djabelsolutions.fr</a> from the account's email address. We handle these requests within 30 days at most, and deletion is permanent."
+  },
+  {
+   "title": "Getting a copy of my data",
+   "html": "Write to <a href=\"mailto:support@djabelsolutions.fr\">support@djabelsolutions.fr</a> from your account's email address to receive a copy of the personal data we hold about you. Here too, the maximum processing time is 30 days."
+  },
+  {
+   "title": "Reporting a bug or suggesting an idea",
+   "html": "Your feedback helps a lot. To make a report actionable, please include:<ul><li>Your phone model and OS version</li><li>The app version</li><li>The steps that reproduce the problem, and a screenshot if you have one</li></ul>"
+  },
+  {
+   "title": "Response time",
+   "html": "Souv'nir is built by Djabel Solutions, a small team. We usually reply within 2 to 3 business days, and within 30 days at the latest for requests about your personal data."
+  }
+ ]
+}

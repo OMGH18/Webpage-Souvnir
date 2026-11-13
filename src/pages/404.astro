@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets'
+import Base from '../layouts/Base.astro'
+import StoreButtons from '../components/StoreButtons.astro'
+import mascot from '../assets/art/mascot-pointing.png'
+---
+
+<Base lang="fr" title="Page introuvable · Souvnir" description="Cette page n'existe pas ou a été déplacée." path="/404/" noindex>
+  <section class="section nf">
+    <div class="wrap nf-inner">
+      <Image class="m" src={mascot} alt="" width={260} loading="eager" />
+      <h1 class="display">Aucun Souvnir <span class="hl">ne t’attend ici.</span></h1>
+      <p class="lede">Cette page n’existe pas ou a été déplacée. / This page doesn’t exist or has moved.</p>
+      <div class="links">
+        <a class="btn btn-primary" href="/">Retour à l’accueil</a>
+        <a class="btn btn-ghost" href="/en/">English home</a>
+      </div>
+      <StoreButtons lang="fr" center />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf-inner { display: grid; justify-items: center; text-align: center; gap: 6px; padding: 30px var(--gutter) 10px; }
+  .nf :global(.m) { width: 170px; height: auto; transform: rotate(-4deg); filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5)); }
+  .nf h1 { max-width: 760px; margin-top: 10px; }
+  .nf h1 .hl { display: block; }
+  .nf .lede { margin: 16px auto 22px; }
+  .links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 18px; }
+</style>

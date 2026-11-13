@@ -1,0 +1,122 @@
+---
+import { LIMITS, PRICES, formatPrice, type Lang } from '../data/product'
+import { ROUTES } from '../i18n/ui'
+
+interface Props { lang: Lang; showDetailsLink?: boolean }
+const { lang, showDetailsLink = true } = Astro.props
+const fr = lang === 'fr'
+const p = (v: number) => formatPrice(v, lang)
+const save = Math.round((1 - PRICES.yearly / (PRICES.monthly * 12)) * 100)
+const premiumMin = `1 min ${LIMITS.premium.seconds - 60}`
+
+const c = fr
+  ? {
+      monthly: 'Mensuel', yearly: 'Annuel', save: `-${save} %`,
+      free: {
+        name: 'Gratuit', price: p(0), sub: 'Pour toujours',
+        items: [`Jusqu’à ${LIMITS.free.notes} Souvnirs actifs`, `${LIMITS.free.friends} amis`, `Vocaux de ${LIMITS.free.seconds} secondes, avec photo`, 'Notification quand tu passes à côté', 'Un Souvnir s’efface après son écoute sur place'],
+        cta: 'Commencer gratuitement',
+      },
+      premium: {
+        name: 'Souvnir+', badge: 'Le plus libre', perMonth: '/mois', perYear: '/an',
+        yearlyNote: `soit ${p(PRICES.yearlyPerMonth)} par mois`, monthlyNote: 'Sans engagement',
+        items: ['Souvnirs illimités', 'Amis illimités', `Vocaux jusqu’à ${premiumMin}`, 'Tes Souvnirs restent après écoute : réécoute-les sur place', 'Tout ce qui est gratuit'],
+        cta: 'Passer à Souvnir+',
+      },
+      trust: ['Sans engagement', 'Résiliable à tout moment dans l’App Store', 'Sans publicité, gratuit comme payant'],
+      details: 'Détail complet des prix',
+      note: 'Prix de référence en France. L’App Store affiche le prix exact dans ta devise avant l’achat.',
+    }
+  : {
+      monthly: 'Monthly', yearly: 'Yearly', save: `-${save}%`,
+      free: {
+        name: 'Free', price: p(0), sub: 'Forever',
+        items: [`Up to ${LIMITS.free.notes} active Souvnirs`, `${LIMITS.free.friends} friends`, `${LIMITS.free.seconds}-second voice notes, with a photo`, 'A notification when you pass by', 'A Souvnir is erased once listened to on site'],
+        cta: 'Start for free',
+      },
+      premium: {
+        name: 'Souvnir+', badge: 'Most freedom', perMonth: '/month', perYear: '/year',
+        yearlyNote: `that's ${p(PRICES.yearlyPerMonth)} per month`, monthlyNote: 'No commitment',
+        items: ['Unlimited Souvnirs', 'Unlimited friends', `Voice notes up to ${premiumMin}`, 'Your Souvnirs stay after listening: replay them on site', 'Everything in Free'],
+        cta: 'Get Souvnir+',
+      },
+      trust: ['No commitment', 'Cancel anytime in the App Store', 'No ads, free or paid'],
+      details: 'Full pricing details',
+      note: 'Reference prices in France. The App Store shows the exact price in your currency before you buy.',
+    }
+---
+
+<div class="pricing" data-plan="yearly">
+  <div class="toggle" role="group" aria-label={fr ? 'Période de facturation' : 'Billing period'}>
+    <button type="button" data-set="monthly">{c.monthly}</button>
+    <button type="button" data-set="yearly" aria-pressed="true">{c.yearly} <span class="save">{c.save}</span></button>
+  </div>
+
+  <div class="plans">
+    <div class="card plan">
+      <h3>{c.free.name}</h3>
+      <p class="price"><b>{c.free.price}</b></p>
+      <p class="sub">{c.free.sub}</p>
+      <ul class="check">{c.free.items.map((i) => <li>{i}</li>)}</ul>
+      <a class="btn btn-ghost plan-cta" href="#download">{c.free.cta}</a>
+    </div>
+    <div class="card plan hl-plan">
+      <span class="tag ribbon">{c.premium.badge}</span>
+      <h3>{c.premium.name}</h3>
+      <p class="price">
+        <b class="y">{p(PRICES.yearly)}</b><b class="m">{p(PRICES.monthly)}</b>
+        <span class="y">{c.premium.perYear}</span><span class="m">{c.premium.perMonth}</span>
+      </p>
+      <p class="sub"><span class="y">{c.premium.yearlyNote}</span><span class="m">{c.premium.monthlyNote}</span></p>
+      <ul class="check">{c.premium.items.map((i) => <li>{i}</li>)}</ul>
+      <a class="btn btn-primary plan-cta" href="#download">{c.premium.cta}</a>
+    </div>
+  </div>
+
+  <ul class="trust">{c.trust.map((tr) => <li>{tr}</li>)}</ul>
+  <p class="foot">
+    {showDetailsLink && <a href={ROUTES.pricing[lang]}>{c.details} →</a>}
+    <span>{c.note}</span>
+  </p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.pricing').forEach((box) => {
+    const btns = box.querySelectorAll<HTMLButtonElement>('.toggle button')
+    btns.forEach((b) =>
+      b.addEventListener('click', () => {
+        box.dataset.plan = b.dataset.set
+        btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)))
+      }),
+    )
+  })
+</script>
+
+<style>
+  .toggle { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 999px; }
+  .toggle button { font: inherit; font-weight: 600; font-size: 14px; border: 0; cursor: pointer; padding: 8px 16px; border-radius: 999px; background: transparent; color: var(--muted); }
+  .toggle button[aria-pressed='true'] { background: var(--accent); color: #fff; }
+  .save { font-size: 11px; font-weight: 800; color: #1a1408; background: var(--gold); border-radius: 999px; padding: 1px 6px; margin-left: 4px; }
+  .plans { display: grid; gap: 12px; margin-top: 18px; max-width: 900px; }
+  @media (min-width: 760px) { .plans { grid-template-columns: 1fr 1fr; gap: 16px; } }
+  .plan { position: relative; padding: 24px 22px 22px; display: flex; flex-direction: column; }
+  .hl-plan {
+    border-color: rgba(201, 168, 76, 0.55);
+    background: radial-gradient(120% 70% at 50% 0%, rgba(201, 168, 76, 0.2), transparent 70%), var(--surface-2);
+    box-shadow: 0 20px 50px rgba(201, 168, 76, 0.12), var(--elev-1);
+  }
+  .ribbon { position: absolute; right: 18px; top: 20px; }
+  .plan h3 { font-family: var(--font-brand); font-weight: 600; font-size: 22px; }
+  .price { margin: 12px 0 0; display: flex; align-items: baseline; gap: 6px; }
+  .price b { font-family: var(--font-brand); font-weight: 600; font-size: clamp(38px, 4vw, 50px); letter-spacing: -0.02em; line-height: 1; }
+  .price span { color: var(--muted); }
+  .sub { margin: 6px 0 0; color: var(--gold); font-size: 14px; font-weight: 600; }
+  .plan .check { margin: 18px 0 22px; flex: 1; }
+  .plan-cta { width: 100%; }
+  .pricing[data-plan='yearly'] .m, .pricing[data-plan='monthly'] .y { display: none; }
+  .trust { list-style: none; padding: 0; margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); font-size: 14px; }
+  .trust li { display: inline-flex; align-items: center; gap: 8px; }
+  .trust li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .foot { margin: 10px 0 0; font-size: 13px; color: var(--faint); display: flex; flex-wrap: wrap; gap: 4px 16px; }
+  .foot a { color: var(--text); font-weight: 600; font-size: 14px; text-decoration: none; }
+</style>

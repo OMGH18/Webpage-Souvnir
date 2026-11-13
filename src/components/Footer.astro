@@ -1,0 +1,77 @@
+---
+import { Image } from 'astro:assets'
+import wordmark from '../assets/brand/souvnir-wordmark.png'
+import { PUBLISHER, SOCIALS, type Lang } from '../data/product'
+import { ROUTES, t } from '../i18n/ui'
+
+interface Props { lang: Lang }
+const { lang } = Astro.props
+const ui = t(lang)
+const fr = lang === 'fr'
+const otherLang: Lang = fr ? 'en' : 'fr'
+const home = ROUTES.home[lang]
+---
+
+<footer class="site-footer">
+  <div class="top">
+    <div class="wrap">
+      <div class="head">
+        <a class="logo" href={home} aria-label="Souvnir"><Image class="wm" src={wordmark} alt="" width={240} /></a>
+        <p class="sub">{fr ? 'Les messages qu’on n’entend qu’au bon endroit' : 'Messages you only hear in the right place'}</p>
+      </div>
+      <div class="cols">
+        <nav aria-label={ui.footer.app}>
+          <h2>{ui.footer.app}</h2>
+          <a href={home}>{fr ? 'Accueil' : 'Home'}</a>
+          <a href={`${home}#how`}>{ui.nav.how}</a>
+          <a href={`${home}#ideas`}>{ui.nav.ideas}</a>
+          <a href={`${home}#privacy`}>{ui.nav.privacy}</a>
+          <a href={ROUTES.pricing[lang]}>{ui.nav.pricing}</a>
+        </nav>
+        <nav aria-label={ui.footer.help}>
+          <h2>{ui.footer.help}</h2>
+          <a href={ROUTES.support[lang]}>{ui.footer.support}</a>
+          <a href={`mailto:${PUBLISHER.email}`}>{ui.footer.contact}</a>
+          <a href={ROUTES.privacy[lang]}>{ui.footer.privacy}</a>
+          <a href={ROUTES.terms[lang]}>{ui.footer.terms}</a>
+        </nav>
+        {SOCIALS.length > 0 && (
+          <nav aria-label={fr ? 'Suivre Souvnir' : 'Follow Souvnir'}>
+            <h2>{fr ? 'Suivre Souvnir' : 'Follow Souvnir'}</h2>
+            {SOCIALS.map((s) => <a href={s.url} rel="me">{s.label}</a>)}
+          </nav>
+        )}
+      </div>
+    </div>
+  </div>
+  <div class="wrap bottom">
+    <span class="copy">© 2026 {PUBLISHER.name}</span>
+    <a class="lang" href={ROUTES.home[otherLang]} hreflang={otherLang} lang={otherLang}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      {ui.langSwitch}
+    </a>
+  </div>
+  <p class="wrap legal">{ui.footer.legal}</p>
+</footer>
+
+<style>
+  .site-footer { margin-top: clamp(24px, 4vw, 48px); border-top: 1px solid var(--border); background: var(--bg-2); position: relative; }
+  .site-footer::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent) 30%, var(--gold) 70%, transparent); opacity: 0.8; }
+  .top { padding: 44px 0 36px; }
+  .head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-bottom: 32px; }
+  .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo :global(.wm) { height: 40px; width: auto; }
+  .sub { margin: 0; font-size: 14px; color: var(--faint); }
+  .cols { display: grid; gap: 28px 24px; grid-template-columns: 1fr 1fr; }
+  @media (min-width: 900px) { .cols { grid-template-columns: repeat(4, 1fr); } }
+  nav { display: grid; gap: 8px; align-content: start; }
+  nav h2 { font-family: var(--font-display); font-size: 15px; font-weight: 650; color: var(--text); margin: 0 0 4px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
+  nav a:hover { color: var(--text); }
+  .bottom { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 6px; border-top: 1px solid var(--border); }
+  .copy { color: var(--faint); font-size: 14px; }
+  .lang { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); text-decoration: none; font-size: 14px; }
+  .lang svg { width: 16px; height: 16px; }
+  .lang:hover { color: var(--text); }
+  .legal { font-size: 12px; color: var(--faint); line-height: 1.6; margin: 10px auto 0; padding-bottom: 28px; }
+</style>

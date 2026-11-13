@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets'
+import mascot from '../assets/art/mascot-wave.png'
+import StoreButtons from './StoreButtons.astro'
+import type { Lang } from '../data/product'
+import { t } from '../i18n/ui'
+
+interface Props { lang: Lang; title?: string; body?: string }
+const { lang, title, body } = Astro.props
+const ui = t(lang)
+---
+
+<section class="section cta-section" id="download">
+  <div class="wrap">
+    <div class="band reveal">
+      <div class="halftone dots" aria-hidden="true"></div>
+      <div class="copy">
+        <h2 class="display">{title ?? ui.cta.title}</h2>
+        <p>{body ?? ui.cta.body}</p>
+        <StoreButtons lang={lang} />
+      </div>
+      <Image class="ninja" src={mascot} alt="" width={420} loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section { padding-top: 8px; }
+  .band {
+    position: relative; overflow: hidden;
+    border-radius: var(--radius-lg); border: 1px solid rgba(201, 168, 76, 0.35);
+    background:
+      radial-gradient(60% 110% at 85% 30%, rgba(201, 168, 76, 0.32), transparent 65%),
+      radial-gradient(50% 90% at 100% 100%, rgba(196, 105, 61, 0.38), transparent 70%),
+      linear-gradient(135deg, #2a2116, #181d28 60%, #0e1117);
+    padding: clamp(28px, 5vw, 56px);
+    display: grid; gap: 24px; align-items: center;
+    box-shadow: var(--elev-2);
+  }
+  @media (min-width: 820px) { .band { grid-template-columns: 1.4fr 1fr; } }
+  .dots { position: absolute; inset: 0; opacity: 0.8; mask-image: linear-gradient(90deg, transparent, #000); }
+  .copy { position: relative; z-index: 1; }
+  h2 { font-family: var(--font-brand); font-weight: 600; letter-spacing: -0.015em; line-height: 1.1; font-size: clamp(28px, 3.8vw, 44px); }
+  p { color: #e4dccb; font-size: 17px; margin: 14px 0 26px; max-width: 520px; }
+  .ninja {
+    position: relative; z-index: 1; justify-self: center;
+    width: min(280px, 70%); height: auto;
+    filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+  }
+  @media (max-width: 819px) { .ninja { display: none; } }
+</style>

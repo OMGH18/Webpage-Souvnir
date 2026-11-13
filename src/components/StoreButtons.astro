@@ -1,0 +1,39 @@
+---
+// Badge officiel App Store (Souvnir n'existe que sur iPhone). Si un badge
+// existe dans la langue de la page (src/assets/badges/app-store-<lang>.svg),
+// il est utilisé ; sinon on prend la version anglaise.
+import type { ImageMetadata } from 'astro'
+import { iosLink, type Lang } from '../data/product'
+import { t } from '../i18n/ui'
+
+interface Props {
+  lang: Lang
+  note?: boolean
+  center?: boolean
+}
+const { lang, note = true, center = false } = Astro.props
+const ui = t(lang).stores
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/badges/*.svg', { eager: true })
+const apple = (files[`../assets/badges/app-store-${lang}.svg`] ?? files['../assets/badges/app-store-en.svg'])!.default
+---
+
+<div class:list={['stores', { center }]}>
+  <div class="row">
+    <a class="store" href={iosLink(lang)}>
+      <img src={apple.src} width={apple.width} height={apple.height} alt={ui.iosAlt} />
+    </a>
+    <slot />
+  </div>
+  {note && <p class="note">{ui.note}</p>}
+</div>
+
+<style>
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .center .row { justify-content: center; }
+  .store { display: inline-block; line-height: 0; border-radius: 9px; transition: transform 0.15s ease, filter 0.15s ease; }
+  .store:hover { transform: translateY(-2px); filter: drop-shadow(0 10px 22px rgba(201, 168, 76, 0.35)); }
+  .store img { height: 54px; width: auto; }
+  .note { font-size: 13px; color: var(--muted); margin: 14px 0 0; }
+  .center .note { text-align: center; }
+  @media (max-width: 420px) { .store img { height: 50px; } }
+</style>

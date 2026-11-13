@@ -1,0 +1,93 @@
+---
+// Pages légales et d'aide au design du site. Les textes sont repris tels
+// quels de l'ancien site (src/content/legal.json), section par section.
+import Base from '../layouts/Base.astro'
+import legal from '../content/legal.json'
+import { PUBLISHER, SITE, type Lang } from '../data/product'
+import { ROUTES } from '../i18n/ui'
+import { breadcrumbs, faqPage, webPage } from '../data/schema'
+
+type Doc = 'privacy' | 'terms' | 'support'
+interface Props { lang: Lang; doc: Doc }
+const { lang, doc } = Astro.props
+const fr = lang === 'fr'
+const titles: Record<Doc, Record<Lang, string>> = {
+  privacy: { fr: 'Politique de confidentialité', en: 'Privacy Policy' },
+  terms: { fr: "Conditions d'utilisation", en: 'Terms of Use' },
+  support: { fr: 'Assistance', en: 'Support' },
+}
+const ledes: Record<Doc, Record<Lang, string>> = {
+  privacy: { fr: 'Comment tes souvenirs vocaux et tes données sont traités.', en: 'How your voice memories and your data are handled.' },
+  terms: { fr: 'Les règles qui encadrent ton usage de Souvnir.', en: 'The rules that govern your use of Souvnir.' },
+  support: { fr: 'Les réponses aux questions les plus courantes, et un e-mail pour le reste.', en: 'Answers to the most common questions, and an email for the rest.' },
+}
+const sections = (legal as Record<string, { title: string; html: string }[]>)[`${doc}-${lang}`]
+const title = titles[doc][lang]
+const path = ROUTES[doc][lang]
+const updated = doc === 'support' ? null : fr ? 'Dernière mise à jour : mai 2025' : 'Last updated: May 2025'
+const tabs: { key: Doc; label: string }[] = [
+  { key: 'support', label: titles.support[lang] },
+  { key: 'privacy', label: fr ? 'Confidentialité' : 'Privacy' },
+  { key: 'terms', label: fr ? 'Conditions' : 'Terms' },
+]
+const strip = (h: string) => h.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim()
+const jsonLd = [
+  webPage(path, `${title} — Souvnir`, lang),
+  breadcrumbs([{ name: 'Souvnir', path: ROUTES.home[lang] }, { name: title, path }]),
+  ...(doc === 'support' ? [faqPage(`${SITE}${path}#faq`, sections.map((s) => ({ q: s.title, a: strip(s.html) })))] : []),
+]
+const description = `${ledes[doc][lang]} ${fr ? 'Souvnir, édité par' : 'Souvnir, published by'} ${PUBLISHER.name}.`
+---
+
+<Base lang={lang} title={`${title} — Souvnir`} description={description} path={path} alternates={{ fr: ROUTES[doc].fr, en: ROUTES[doc].en }} jsonLd={jsonLd}>
+  <section class="section">
+    <div class="wrap doc">
+      <nav class="crumbs" aria-label={fr ? "Fil d'Ariane" : 'Breadcrumb'}><a href={ROUTES.home[lang]}>Souvnir</a> / <span>{title}</span></nav>
+      <h1 class="display">{title}</h1>
+      <p class="lede">{ledes[doc][lang]}</p>
+      {updated && <p class="updated">{updated}</p>}
+      <nav class="tabs" aria-label="Documents">
+        {tabs.map((tb) => <a href={ROUTES[tb.key][lang]} aria-current={tb.key === doc ? 'page' : undefined}>{tb.label}</a>)}
+      </nav>
+      {sections.map((s, i) => (
+        <section class="block">
+          <h2><span class="n">{String(i + 1).padStart(2, '0')}</span>{s.title}</h2>
+          <div class="body" set:html={s.html} />
+        </section>
+      ))}
+      <a class="panel mail" href={`mailto:${PUBLISHER.email}`}>
+        <span class="mi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg></span>
+        <span><b>{fr ? 'Une question ? Écris-nous' : 'A question? Email us'}</b><span class="addr">{PUBLISHER.email}</span></span>
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .doc { max-width: 820px; }
+  .crumbs { font-size: 14px; color: var(--muted); margin-bottom: 18px; }
+  .crumbs a { color: var(--muted); text-decoration: none; }
+  .crumbs span { color: var(--text); }
+  .doc h1 { font-size: clamp(32px, 4.6vw, 52px); }
+  .doc .lede { margin-top: 12px; }
+  .updated { color: var(--faint); font-size: 14px; margin: 10px 0 0; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 8px; }
+  .tabs a { font-size: 14px; font-weight: 600; text-decoration: none; color: var(--muted); padding: 7px 13px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface); }
+  .tabs a:hover { color: var(--text); }
+  .tabs a[aria-current='page'] { color: #fff; background: var(--accent); border-color: var(--accent); }
+  .block { padding: 24px 0 6px; border-bottom: 1px solid var(--border); }
+  .block h2 { font-family: var(--font-brand); font-weight: 600; font-size: 22px; display: flex; gap: 12px; align-items: baseline; }
+  .n { font-style: italic; color: var(--gold-light); font-size: 18px; }
+  .body { color: var(--muted); font-size: 15.5px; line-height: 1.65; margin-top: 8px; }
+  .body :global(p) { margin: 8px 0; }
+  .body :global(ul), .body :global(ol) { margin: 8px 0; padding-left: 20px; display: grid; gap: 6px; }
+  .body :global(li::marker) { color: var(--accent); }
+  .body :global(strong), .body :global(b) { color: var(--text); font-weight: 600; }
+  .body :global(a) { color: var(--accent-hot); }
+  .mail { display: flex; gap: 16px; align-items: center; padding: 20px 22px; margin-top: 30px; text-decoration: none; color: var(--text); transition: border-color 0.15s; }
+  .mail:hover { border-color: var(--accent); color: var(--text); }
+  .mi { width: 46px; height: 46px; flex: none; display: grid; place-items: center; border-radius: 14px; background: var(--brand-subtle); color: var(--accent-hot); }
+  .mi svg { width: 24px; height: 24px; }
+  .mail b { display: block; font-weight: 650; font-size: 17px; }
+  .addr { display: block; color: var(--accent-hot); font-weight: 600; margin-top: 2px; }
+</style>

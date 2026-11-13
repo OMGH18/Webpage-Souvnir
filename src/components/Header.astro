@@ -1,0 +1,80 @@
+---
+import { Image } from 'astro:assets'
+import wordmark from '../assets/brand/souvnir-wordmark.png'
+import type { Lang } from '../data/product'
+import { ROUTES, t } from '../i18n/ui'
+
+interface Props {
+  lang: Lang
+  path: string
+  alternates?: { fr: string | null; en: string | null }
+}
+const { lang, path, alternates } = Astro.props
+const ui = t(lang)
+const home = ROUTES.home[lang]
+const otherLang: Lang = lang === 'fr' ? 'en' : 'fr'
+const switchHref = alternates?.[otherLang] ?? ROUTES.home[otherLang]
+
+const links = [
+  { href: `${home}#how`, label: ui.nav.how },
+  { href: `${home}#ideas`, label: ui.nav.ideas },
+  { href: `${home}#privacy`, label: ui.nav.privacy },
+  { href: ROUTES.support[lang], label: ui.nav.support },
+]
+const isCurrent = (href: string) => !href.includes('#') && href !== home && path.startsWith(href)
+---
+
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href={home} aria-label="Souvnir">
+      <Image class="wm" src={wordmark} alt="" width={240} loading="eager" />
+    </a>
+    <nav class="links" aria-label={ui.navLabel}>
+      {links.map((l) => <a href={l.href} aria-current={isCurrent(l.href) ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <div class="actions">
+      <a class="pill" href={ROUTES.pricing[lang]} aria-current={isCurrent(ROUTES.pricing[lang]) ? 'page' : undefined}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 14.6 8l6 .7-4.4 4.1 1.2 5.9L12 15.8l-5.4 2.9 1.2-5.9L3.4 8.7l6-.7L12 2.5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <span>{ui.nav.pricing}</span>
+      </a>
+      <a class="pill icon-only" href={switchHref} hreflang={otherLang} lang={otherLang} aria-label={ui.langSwitch} title={ui.langSwitch}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span class="lang-code">{otherLang.toUpperCase()}</span>
+      </a>
+      <a class="btn btn-primary cta" href="#download">{ui.nav.download}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(14, 17, 23, 0.86);
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .bar { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); height: 58px; display: flex; align-items: center; gap: 8px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none; margin-right: 14px; }
+  .brand img:not(.wm) { width: 32px; height: 32px; border-radius: 9px; }
+  .brand :global(.wm) { height: 34px; width: auto; margin-top: 2px; }
+  .links { display: none; gap: 4px; }
+  .links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 15px; padding: 7px 12px; border-radius: 8px; }
+  .links a:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+  .links a[aria-current='page'] { color: var(--accent-hot); }
+  .actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 13px;
+    border-radius: 10px; background: var(--surface-2); border: 1px solid var(--border-strong);
+    color: var(--text); text-decoration: none; font-weight: 500; font-size: 14px;
+  }
+  .pill:hover { background: var(--card-hover); color: var(--text); }
+  .pill[aria-current='page'] { border-color: var(--accent); }
+  .pill svg { width: 16px; height: 16px; }
+  .icon-only { padding: 0 10px; }
+  .lang-code { font-size: 12px; font-weight: 600; color: var(--muted); }
+  .cta { height: 36px; padding: 0 14px; font-size: 14px; }
+  @media (min-width: 900px) { .links { display: flex; } }
+  @media (max-width: 899px) { .cta { display: none; } }
+
+</style>
